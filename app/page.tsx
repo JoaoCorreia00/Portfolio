@@ -4,13 +4,41 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 
+const FULL_NAME = "João Correia";
+// The J is already the first char; we type the rest after
+const TYPE_REST = FULL_NAME.slice(1); // "oão Correia"
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [typedText, setTypedText] = useState("J");
+  const [isTypingDone, setIsTypingDone] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 4500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Start typing animation once loader is gone
+  useEffect(() => {
+    if (isLoading) return;
+
+    // Wait for the J entrance animation to finish before typing starts
+    let charIndex = 0;
+    const typingDelay = setTimeout(() => {
+      const interval = setInterval(() => {
+        charIndex++;
+        setTypedText("J" + TYPE_REST.slice(0, charIndex));
+        if (charIndex === TYPE_REST.length) {
+          clearInterval(interval);
+          // Remove cursor after a short pause
+          setTimeout(() => setIsTypingDone(true), 600);
+        }
+      }, 80); // ~80ms per character
+      return () => clearInterval(interval);
+    }, 900); // let the J entrance animation finish first (~0.8s)
+
+    return () => clearTimeout(typingDelay);
+  }, [isLoading]);
 
   return (
     <>
@@ -26,14 +54,25 @@ export default function Home() {
           >
             {/* Main Content */}
             <div className="relative z-10 flex flex-col justify-center items-center h-full px-8 text-white text-center">
+
+              {/* Title with typing animation */}
+              {/* The J starts scaled-up (like the loader's J) and shrinks down to title size */}
               <motion.h1
-                className="text-7xl md:text-8xl font-bold mb-6"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
+                className="text-7xl md:text-8xl font-bold mb-6 flex items-center"
+                initial={{ opacity: 0, scale: 2.8, filter: "blur(8px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
-                João Correia
+                <span>{typedText}</span>
+                {/* Blinking cursor — hidden once typing is complete */}
+                {!isTypingDone && (
+                  <span className="typing-cursor" aria-hidden="true" />
+                )}
               </motion.h1>
+
               <motion.h2
                 className="text-3xl md:text-4xl text-gray-300 mb-6"
                 initial={{ opacity: 0, y: 50 }}

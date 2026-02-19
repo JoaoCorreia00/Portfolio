@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
+import AbstractWaveGrid from "./components/AbstractWaveGrid";
 
 const FULL_NAME = "João Correia";
 // The J is already the first char; we type the rest after
@@ -52,7 +53,10 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Main Content */}
+            {/* Abstract Wave Grid background */}
+          <AbstractWaveGrid />
+
+          {/* Main Content */}
             <div className="relative z-10 flex flex-col justify-center items-center h-full px-8 text-white text-center">
 
               {/* Title with typing animation */}

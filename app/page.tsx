@@ -13,11 +13,24 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [typedText, setTypedText] = useState("J");
   const [isTypingDone, setIsTypingDone] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 4500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Detect scroll to fade out hint
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50 && !hasScrolled) {
+        setHasScrolled(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasScrolled]);
 
   // Start typing animation once loader is gone
   useEffect(() => {
@@ -124,12 +137,12 @@ export default function Home() {
                 </motion.p>
               </div>
 
-              {/* Bottom Scroll Hint */}
+              {/* Bottom Scroll Hint - fades out on scroll */}
               <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
+                className="fixed bottom-8 left-1/2 transform -translate-x-1/2 text-white z-50 pointer-events-none"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 2.5 }}
+                animate={{ opacity: hasScrolled ? 0 : 1 }}
+                transition={{ duration: 0.5 }}
               >
                 <motion.div
                   className="flex flex-col items-center"

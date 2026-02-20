@@ -53,8 +53,14 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Abstract Wave Grid background */}
-          <AbstractWaveGrid />
+            {/* Abstract Wave Grid background - fades in after loader */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 1.2 }}
+          >
+            <AbstractWaveGrid />
+          </motion.div>
 
           {/* Main Content */}
             <div className="relative z-10 flex flex-col justify-center items-center h-full px-8 text-white text-center">

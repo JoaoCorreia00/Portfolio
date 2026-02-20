@@ -245,6 +245,14 @@ export default function AbstractWaveGrid() {
         cx.fillRect(0, i, w, 1);
       }
 
+      // ── Bottom fade gradient to hide grid cut-off ──────
+      const bottomFadeHeight = h * 0.30;
+      const bottomFade = cx.createLinearGradient(0, h - bottomFadeHeight, 0, h);
+      bottomFade.addColorStop(0, "transparent");
+      bottomFade.addColorStop(1, "#0b0f14");
+      cx.fillStyle = bottomFade;
+      cx.fillRect(0, h - bottomFadeHeight, w, bottomFadeHeight);
+
       time += WAVE_SPEED;
       animationId = requestAnimationFrame(draw);
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Loader from "./components/Loader";
 import AbstractWaveGrid from "./components/AbstractWaveGrid";
 
@@ -9,22 +9,52 @@ const FULL_NAME = "João Correia";
 // The J is already the first char; we type the rest after
 const TYPE_REST = FULL_NAME.slice(1); // "oão Correia"
 
+// Navigation items
+const NAV_ITEMS = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [typedText, setTypedText] = useState("J");
   const [isTypingDone, setIsTypingDone] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 4500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Detect scroll to fade out hint
+  // Detect scroll for progress and active section
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50 && !hasScrolled) {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      
+      setScrollProgress(progress);
+      
+      if (scrollY > 50 && !hasScrolled) {
         setHasScrolled(true);
+      }
+
+      // Determine active section
+      const sections = ["home", "about", "skills", "projects", "contact"];
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150) {
+            setActiveSection(section);
+            break;
+          }
+        }
       }
     };
 
@@ -54,9 +84,147 @@ export default function Home() {
     return () => clearTimeout(typingDelay);
   }, [isLoading]);
 
+  const scrollToSection = (href: string) => {
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {isLoading && <Loader />}
+      
+      {/* Navigation Bar */}
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.nav
+            className="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 py-5"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="w-full flex items-center justify-between">
+              <div></div>
+
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-12">
+                {NAV_ITEMS.map((item) => (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollToSection(item.href)}
+                    className={`text-base font-medium transition-all duration-300 relative ${
+                      activeSection === item.href.replace("#", "")
+                        ? "text-white"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                    {activeSection === item.href.replace("#", "") && (
+                      <motion.div
+                        layoutId="nav-indicator"
+                        className="absolute -bottom-1 left-0 right-0 h-[2px] bg-white"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="md:hidden text-white p-2"
+                onClick={() => {
+                  const menu = document.getElementById("mobile-menu");
+                  menu?.classList.toggle("hidden");
+                }}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md mt-2 py-4 px-6">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`block w-full text-left py-2 text-sm font-medium ${
+                    activeSection === item.href.replace("#", "")
+                      ? "text-white"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Manga-style Scroll Progress Indicator (Left Side) */}
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div
+            className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden md:block"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 2 }}
+          >
+            {/* Progress dots */}
+            <div className="flex flex-col gap-4">
+              {NAV_ITEMS.map((item, index) => {
+                const sectionId = item.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollToSection(item.href)}
+                    className="group relative flex items-center"
+                    title={item.label}
+                  >
+                    {/* Tooltip */}
+                    <span className="absolute left-8 bg-white/10 backdrop-blur-sm text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      {item.label}
+                    </span>
+                    
+                    {/* Dot */}
+                    <motion.div
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        isActive ? "bg-white scale-125" : "bg-white/30 group-hover:bg-white/60"
+                      }`}
+                      animate={{
+                        boxShadow: isActive ? "0 0 8px rgba(255,255,255,0.8)" : "none"
+                      }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Vertical progress line */}
+            <motion.div
+              className="absolute left-[3px] top-2 w-[2px] bg-white/20"
+              style={{ height: "calc(100% - 16px)" }}
+            >
+              <motion.div
+                className="w-full bg-white"
+                style={{
+                  height: `${scrollProgress}%`,
+                  position: "absolute",
+                  top: 0,
+                }}
+                transition={{ duration: 0.1 }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {!isLoading && (
           <motion.div
@@ -67,7 +235,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             {/* Hero Section - Full Viewport Height */}
-            <section className="relative h-screen overflow-hidden">
+            <section id="home" className="relative h-screen overflow-hidden">
               {/* Abstract Wave Grid background - fades in after loader */}
               <motion.div
                 initial={{ opacity: 0 }}
@@ -83,13 +251,14 @@ export default function Home() {
                 {/* Title with typing animation */}
                 {/* The J starts scaled-up (like the loader's J) and shrinks down to title size */}
                 <motion.h1
-                  className="text-7xl md:text-8xl font-bold mb-6 flex items-center"
+                  className="text-7xl md:text-8xl font-bold mb-6 flex items-center bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
                   initial={{ opacity: 0, scale: 2.8, filter: "blur(8px)" }}
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   transition={{
                     duration: 0.75,
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  style={{ background: "linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #a0a0a0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
                 >
                   <span>{typedText}</span>
                   {/* Blinking cursor — hidden once typing is complete */}
@@ -162,7 +331,7 @@ export default function Home() {
             </section>
 
             {/* About Me Section */}
-            <section className="min-h-screen text-white px-8 md:px-20 py-60">
+            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60">
               <div className="max-w-6xl mx-auto">
                 {/* Section Title */}
                 <motion.div

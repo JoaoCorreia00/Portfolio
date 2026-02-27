@@ -9,6 +9,73 @@ const FULL_NAME = "João Correia";
 // The J is already the first char; we type the rest after
 const TYPE_REST = FULL_NAME.slice(1); // "oão Correia"
 
+// Technology categories with icons
+const TECHNOLOGY_CATEGORIES = [
+  {
+    name: "Frontend",
+    technologies: [
+      { name: "JavaScript", colorIcon: "/Javascript.png", greyIcon: "/Javascript_grey.png" },
+      { name: "TypeScript", colorIcon: "/Typescript.png", greyIcon: "/Typescript_grey.png" },
+      { name: "Vue.js", colorIcon: "/Vue.png", greyIcon: "/Vue_grey.png" },
+      { name: "React", colorIcon: "/React.png", greyIcon: "/React_grey.png" },
+      { name: "Angular", colorIcon: "/Angular.png", greyIcon: "/Angular_grey.png" },
+      { name: "Next.js", colorIcon: "/Nextjs.png", greyIcon: "/Nextjs_grey.png" },
+      { name: "React Native", colorIcon: "/React.png", greyIcon: "/React_grey.png" },
+      { name: "HTML", colorIcon: "/Html.png", greyIcon: "/Html_grey.png" },
+      { name: "CSS", colorIcon: "/Css.png", greyIcon: "/Css_grey.png" },
+      { name: "jQuery", colorIcon: "/jQuery.png", greyIcon: "/jQuery_grey.png" },
+      { name: "TailwindCSS", colorIcon: "/TailwindCSS.png", greyIcon: "/TailwindCSS_grey.png" },
+      { name: "Bootstrap", colorIcon: "/Bootstrap.png", greyIcon: "/Bootstrap_grey.png" },
+    ],
+  },
+  {
+    name: "Backend",
+    technologies: [
+      { name: "PHP", colorIcon: "/Php.png", greyIcon: "/Php_grey.png" },
+      { name: "Node.js", colorIcon: "/Node.png", greyIcon: "/Node_grey.png" },
+      { name: "Laminas", colorIcon: "/Laminas.png", greyIcon: "/Laminas_grey.png" },
+      { name: "Zend", colorIcon: "/Zend.png", greyIcon: "/Zend_grey.png" },
+      { name: "Kotlin", colorIcon: "/Kotlin.png", greyIcon: "/Kotlin_grey.png" },
+      { name: "Ruby", colorIcon: "/Ruby.png", greyIcon: "/Ruby_grey.png" },
+      { name: "C#", colorIcon: "/C.png", greyIcon: "/C_grey.png" },
+      { name: "C++", colorIcon: "/C++.png", greyIcon: "/C++_grey.png" },
+    ],
+  },
+  {
+    name: "Databases",
+    technologies: [
+      { name: "SQL", colorIcon: "/Sql.png", greyIcon: "/Sql_grey.png" },
+      { name: "MySQL", colorIcon: "/MySql.png", greyIcon: "/MySql_grey.png" },
+      { name: "PostgreSQL", colorIcon: "/Postgresql.png", greyIcon: "/Postgresql_grey.png" },
+      { name: "XML", colorIcon: "/XML.png", greyIcon: "/XML_grey.png" },
+      { name: "Json", colorIcon: "/Json.png", greyIcon: "/Json_grey.png" },
+      { name: "Firebase", colorIcon: "/Firebase.png", greyIcon: "/Firebase_grey.png" },
+    ],
+  },
+  {
+    name: "DevOps & Cloud",
+    technologies: [
+      { name: "Git", colorIcon: "/Git.png", greyIcon: "/Git_grey.png" },
+      { name: "GitHub", colorIcon: "/GitHub.png", greyIcon: "/GitHub_grey.png" },
+      { name: "GitHub Actions", colorIcon: "/GitHubActions.png", greyIcon: "/GitHubActions_grey.png" },
+      { name: "BitBucket", colorIcon: "/BitBucket.png", greyIcon: "/BitBucket_grey.png" },
+      { name: "GitLab", colorIcon: "/GitLab.png", greyIcon: "/GitLab_grey.png" },
+      { name: "Docker", colorIcon: "/Docker.png", greyIcon: "/Docker_grey.png" },
+      { name: "Jenkins", colorIcon: "/Jenkins.png", greyIcon: "/Jenkins_grey.png" },
+    ],
+  },
+  {
+    name: "Testing & Tools",
+    technologies: [
+      { name: "Jest", colorIcon: "/Jest.png", greyIcon: "/Jest_grey.png" },
+      { name: "Postman", colorIcon: "/Postman.png", greyIcon: "/Postman_grey.png" },
+      { name: "ESLint", colorIcon: "/Eslint.png", greyIcon: "/Eslint_grey.png" },
+      { name: "Vite", colorIcon: "/Vite.png", greyIcon: "/Vite_grey.png" },
+      { name: "Figma", colorIcon: "/Figma.png", greyIcon: "/Figma_grey.png" },
+    ],
+  },
+];
+
 // Navigation items
 const NAV_ITEMS = [
   { label: "Home", href: "#home" },
@@ -438,6 +505,83 @@ export default function Home() {
                       />
                     </div>
                   </motion.div>
+                </div>
+              </div>
+            </section>
+
+            {/* Technologies / Skills Section */}
+            <section id="skills" className="min-h-screen text-white px-8 md:px-20 py-60">
+              <div className="max-w-7xl mx-auto">
+                {/* Section Title */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                    Technologies & <span className="text-gray-400">Skills</span>
+                  </h2>
+                  <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent mb-16" />
+                </motion.div>
+
+                {/* Technology Categories Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                  {TECHNOLOGY_CATEGORIES.map((category, categoryIndex) => (
+                    <motion.div
+                      key={category.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
+                      className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-300"
+                    >
+                      {/* Category Title */}
+                      <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-gray-700/50 pb-3">
+                        {category.name}
+                      </h3>
+
+                      {/* Technology Icons Grid */}
+                      {category.technologies.length > 0 ? (
+                        <div className="grid grid-cols-2 gap-4">
+                          {category.technologies.map((tech, techIndex) => (
+                            <motion.div
+                              key={tech.name}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.5, delay: categoryIndex * 0.1 + techIndex * 0.05 }}
+                              className="group flex flex-col items-center justify-center p-3 rounded-xl hover:bg-gray-700/20 transition-all duration-300"
+                            >
+                              {/* Icon Container with Hover Effect */}
+                              <div className="relative w-12 h-12 mb-2">
+                                {/* Grey Icon (default) */}
+                                <img
+                                  src={tech.greyIcon}
+                                  alt={tech.name}
+                                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
+                                />
+                                {/* Color Icon (on hover) */}
+                                <img
+                                  src={tech.colorIcon}
+                                  alt={tech.name}
+                                  className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                />
+                              </div>
+                              {/* Technology Name */}
+                              <span className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300 text-center">
+                                {tech.name}
+                              </span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center h-24 text-gray-500 text-sm italic">
+                          Coming soon
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </section>

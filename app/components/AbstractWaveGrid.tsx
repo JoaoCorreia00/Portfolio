@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Particle {
   x: number;
@@ -12,6 +12,7 @@ interface Particle {
 
 export default function AbstractWaveGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,9 +26,10 @@ export default function AbstractWaveGrid() {
 
     let animationId: number;
     let time = 0;
+    let isRunning = true;
 
-    const COLS = 28;
-    const ROWS = 28;
+    const COLS = 20;
+    const ROWS = 20;
     const WAVE_AMPLITUDE = 30;
     const WAVE_SPEED = 0.012;
 
@@ -37,7 +39,7 @@ export default function AbstractWaveGrid() {
 
     // Particles for extra visual interest
     const particles: Particle[] = [];
-    const PARTICLE_COUNT = 400;
+    const PARTICLE_COUNT = 150;
 
     function initParticles(w: number, h: number) {
       particles.length = 0;
@@ -254,14 +256,50 @@ export default function AbstractWaveGrid() {
       cx.fillRect(0, h - bottomFadeHeight, w, bottomFadeHeight);
 
       time += WAVE_SPEED;
+      if (isRunning) {
+        animationId = requestAnimationFrame(draw);
+      }
+    }
+
+    // Start animation
+    if (isRunning) {
       animationId = requestAnimationFrame(draw);
     }
 
-    animationId = requestAnimationFrame(draw);
+    // Intersection Observer - pause when not in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isRunning = entry.isIntersecting;
+          if (isRunning && !animationId) {
+            animationId = requestAnimationFrame(draw);
+          } else if (!isRunning && animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = 0;
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(cv);
+
+    // Page Visibility API - pause when tab is not active
+    const handleVisibilityChange = () => {
+      isRunning = !document.hidden;
+      if (isRunning && !animationId) {
+        animationId = requestAnimationFrame(draw);
+      } else if (!isRunning && animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = 0;
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       cancelAnimationFrame(animationId);
       ro.disconnect();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

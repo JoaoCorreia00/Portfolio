@@ -400,30 +400,20 @@ export default function Home() {
             </section>
 
             {/* About Me Section */}
-            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60 ">
+            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60">
               <div className="max-w-6xl mx-auto">
                 {/* Section Title */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8 }}
-                >
+                <div className="mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold mb-4">
                     About <span className="text-gray-400">Me</span>
                   </h2>
-                  <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent mb-16" />
-                </motion.div>
+                  <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent" />
+                </div>
 
                 {/* Two Column Layout */}
                 <div className="grid md:grid-cols-2 gap-16 items-center">
                   {/* Left Column - Text Content */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  >
+                  <div>
                     <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-200">
                       Full-Stack Developer Based in Portugal
                     </h3>
@@ -437,17 +427,10 @@ export default function Home() {
                     <p className="text-lg text-gray-400 leading-relaxed mb-8">
                       I&apos;ve contributed to legacy migrations, authentication systems and complex API integrations, ensuring reliability and maintainability across evolving platforms. I aim to bridge backend logic with thoughtful frontend implementation, aligning performance with user experience.
                     </p>
-                    
-                  </motion.div>
+                  </div>
 
                   {/* Right Column - Visual Element */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="relative"
-                  >
+                  <div className="relative">
                     {/* Decorative Card with Code Snippet Aesthetic */}
                     <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
                       
@@ -506,7 +489,7 @@ export default function Home() {
                         transition={{ duration: 0.8, repeat: Infinity }}
                       />
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -515,18 +498,12 @@ export default function Home() {
             <section id="skills" className="min-h-screen text-white px-6 md:px-16 py-40">
               <div className="max-w-7xl mx-auto">
                 {/* Section Title */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8 }}
-                  className="mb-20"
-                >
+                <div className="mb-20">
                   <h2 className="text-4xl md:text-5xl font-bold mb-4">
                     Technologies & <span className="text-gray-400">Skills</span>
                   </h2>
                   <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent" />
-                </motion.div>
+                </div>
 
                 {/* Technology Categories Grid - Enhanced Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-9">
@@ -544,9 +521,6 @@ export default function Home() {
                     return (
                       <motion.div
                         key={category.name}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
                         className={`group relative bg-gradient-to-br ${colors.gradient} to-gray-900/40 rounded-2xl p-6 border ${colors.border} backdrop-blur-md hover:border-opacity-60 transition-all duration-500 hover:scale-[1.02] ${colors.glow} hover:shadow-lg`}
                       >
                         {/* Subtle animated background pattern */}
@@ -558,13 +532,7 @@ export default function Home() {
                         <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-gray-700/40 pb-3 relative">
                           <span className="relative">
                             {category.name}
-                            <motion.span
-                              className="absolute -bottom-3 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent"
-                              initial={{ width: 0 }}
-                              whileInView={{ width: "60%" }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.8, delay: 0.3 }}
-                            />
+                            <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:w-[60%] transition-all duration-300" />
                           </span>
                         </h3>
 
@@ -572,11 +540,8 @@ export default function Home() {
                         {category.technologies.length > 0 ? (
                           <div className="grid grid-cols-3 gap-3">
                             {category.technologies.map((tech) => (
-                              <motion.div
+                              <div
                                 key={tech.name}
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
                                 className="group/tech flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-700/30 transition-all duration-300 cursor-pointer"
                               >
                                 {/* Icon Container with Hover Effect */}
@@ -602,7 +567,7 @@ export default function Home() {
                                 <span className="text-[10px] text-gray-400 group-hover/tech:text-white transition-all duration-300 text-center leading-tight group-hover/tech:font-medium">
                                   {tech.name}
                                 </span>
-                              </motion.div>
+                              </div>
                             ))}
                           </div>
                         ) : (

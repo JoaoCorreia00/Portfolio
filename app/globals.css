@@ -9,6 +9,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Prevent layout shift and flickering with framer-motion animations */
+.motion-div, [class*="motion-"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Ensure sections have proper stacking context */
+section {
+  position: relative;
+  transform: translateZ(0);
 }
 
 /* Typing cursor for the title animation */

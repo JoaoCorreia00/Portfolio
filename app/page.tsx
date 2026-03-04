@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import AbstractWaveGrid from "./components/AbstractWaveGrid";
+import Image from "next/image";
+
 
 const FULL_NAME = "João Correia";
 // The J is already the first char; we type the rest after
@@ -244,7 +246,7 @@ export default function Home() {
           >
             {/* Progress dots */}
             <div className="flex flex-col gap-4">
-              {NAV_ITEMS.map((item, index) => {
+              {NAV_ITEMS.map((item) => {
                 const sectionId = item.href.replace("#", "");
                 const isActive = activeSection === sectionId;
                 return (
@@ -302,7 +304,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             {/* Hero Section - Full Viewport Height */}
-            <section id="home" className="relative h-screen overflow-hidden">
+            <section id="home" className="relative h-screen overflow-hidden ">
               {/* Abstract Wave Grid background - fades in after loader */}
               <motion.div
                 initial={{ opacity: 0 }}
@@ -398,7 +400,7 @@ export default function Home() {
             </section>
 
             {/* About Me Section */}
-            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60">
+            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60 ">
               <div className="max-w-6xl mx-auto">
                 {/* Section Title */}
                 <motion.div
@@ -426,14 +428,14 @@ export default function Home() {
                       Full-Stack Developer Based in Portugal
                     </h3>
                     <p className="text-lg text-gray-400 leading-relaxed mb-6">
-                      I'm a full-stack web developer focused on building scalable, 
+                      I&apos;m a full-stack web developer focused on building scalable, 
                       performance-driven applications with clean architecture and 
                       maintainable code. I work mainly within the JavaScript ecosystem 
                       and PHP environments, using frameworks like Vue, React, Node.js 
                       and Laminas.
                     </p>
                     <p className="text-lg text-gray-400 leading-relaxed mb-8">
-                      I've contributed to legacy migrations, authentication systems and complex API integrations, ensuring reliability and maintainability across evolving platforms. I aim to bridge backend logic with thoughtful frontend implementation, aligning performance with user experience.
+                      I&apos;ve contributed to legacy migrations, authentication systems and complex API integrations, ensuring reliability and maintainability across evolving platforms. I aim to bridge backend logic with thoughtful frontend implementation, aligning performance with user experience.
                     </p>
                     
                   </motion.div>
@@ -460,17 +462,17 @@ export default function Home() {
                         <div className="pl-8 space-y-2">
                           <div className="flex gap-2">
                             <span className="text-gray-500">name:</span>
-                            <span className="text-green-400">"João Correia"</span>
+                            <span className="text-green-400">&quot;João Correia&quot;</span>
                             <span className="text-gray-500">,</span>
                           </div>
                           <div className="flex gap-2">
                             <span className="text-gray-500">location:</span>
-                            <span className="text-green-400">"Portugal"</span>
+                            <span className="text-green-400">&quot;Portugal&quot;</span>
                             <span className="text-gray-500">,</span>
                           </div>
                           <div className="flex gap-2">
                             <span className="text-gray-500">role:</span>
-                            <span className="text-green-400">"Full-Stack Developer"</span>
+                            <span className="text-green-400">&quot;Full-Stack Developer&quot;</span>
                             <span className="text-gray-500">,</span>
                           </div>
                           <div className="flex gap-2">
@@ -478,16 +480,16 @@ export default function Home() {
                             <span className="text-yellow-300">[</span>
                           </div>
                           <div className="pl-8">
-                            <span className="text-green-400">"Full-Stack Development"</span><span className="text-gray-500">,</span>
+                            <span className="text-green-400">&quot;Full-Stack Development&quot;</span><span className="text-gray-500">,</span>
                           </div>
                           <div className="pl-8">
-                            <span className="text-green-400">"API Integrations"</span><span className="text-gray-500">,</span>
+                            <span className="text-green-400">&quot;API Integrations&quot;</span><span className="text-gray-500">,</span>
                           </div>
                           <div className="pl-8">
-                            <span className="text-green-400">"Authentication Systems"</span><span className="text-gray-500">,</span>
+                            <span className="text-green-400">&quot;Authentication Systems&quot;</span><span className="text-gray-500">,</span>
                           </div>
                           <div className="pl-8">
-                            <span className="text-green-400">"Legacy System Migration"</span>
+                            <span className="text-green-400">&quot;Legacy System Migration&quot;</span>
                           </div>
                           <div className="flex gap-2">
                             <span className="text-yellow-300">]</span>
@@ -510,7 +512,7 @@ export default function Home() {
             </section>
 
             {/* Technologies / Skills Section */}
-            <section id="skills" className="min-h-screen text-white px-8 md:px-20 py-60">
+            <section id="skills" className="min-h-screen text-white px-6 md:px-16 py-40">
               <div className="max-w-7xl mx-auto">
                 {/* Section Title */}
                 <motion.div
@@ -518,70 +520,99 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.8 }}
+                  className="mb-20"
                 >
                   <h2 className="text-4xl md:text-5xl font-bold mb-4">
                     Technologies & <span className="text-gray-400">Skills</span>
                   </h2>
-                  <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent mb-16" />
+                  <div className="w-24 h-[2px] bg-gradient-to-r from-white to-transparent" />
                 </motion.div>
 
-                {/* Technology Categories Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                  {TECHNOLOGY_CATEGORIES.map((category, categoryIndex) => (
-                    <motion.div
-                      key={category.name}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
-                      className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-2xl p-6 border border-gray-700/30 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-300"
-                    >
-                      {/* Category Title */}
-                      <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-gray-700/50 pb-3">
-                        {category.name}
-                      </h3>
+                {/* Technology Categories Grid - Enhanced Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-9">
+                  {TECHNOLOGY_CATEGORIES.map((category) => {
+                    // Category-specific accent colors
+                    const categoryColors: Record<string, { border: string; glow: string; gradient: string }> = {
+                      "Frontend": { border: "border-blue-500/30", glow: "hover:shadow-blue-500/20", gradient: "from-blue-500/10" },
+                      "Backend": { border: "border-purple-500/30", glow: "hover:shadow-purple-500/20", gradient: "from-purple-500/10" },
+                      "Databases": { border: "border-green-500/30", glow: "hover:shadow-green-500/20", gradient: "from-green-500/10" },
+                      "DevOps & Cloud": { border: "border-orange-500/30", glow: "hover:shadow-orange-500/20", gradient: "from-orange-500/10" },
+                      "Testing & Tools": { border: "border-pink-500/30", glow: "hover:shadow-pink-500/20", gradient: "from-pink-500/10" },
+                    };
+                    const colors = categoryColors[category.name] || { border: "border-gray-500/30", glow: "", gradient: "from-gray-500/10" };
+                    
+                    return (
+                      <motion.div
+                        key={category.name}
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        className={`group relative bg-gradient-to-br ${colors.gradient} to-gray-900/40 rounded-2xl p-6 border ${colors.border} backdrop-blur-md hover:border-opacity-60 transition-all duration-500 hover:scale-[1.02] ${colors.glow} hover:shadow-lg`}
+                      >
+                        {/* Subtle animated background pattern */}
+                        <div className="absolute inset-0 rounded-2xl overflow-hidden">
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.03),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_70%)] transition-all duration-500" />
+                        </div>
 
-                      {/* Technology Icons Grid */}
-                      {category.technologies.length > 0 ? (
-                        <div className="grid grid-cols-2 gap-4">
-                          {category.technologies.map((tech, techIndex) => (
-                            <motion.div
-                              key={tech.name}
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
+                        {/* Category Title */}
+                        <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-gray-700/40 pb-3 relative">
+                          <span className="relative">
+                            {category.name}
+                            <motion.span
+                              className="absolute -bottom-3 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: "60%" }}
                               viewport={{ once: true }}
-                              transition={{ duration: 0.5, delay: categoryIndex * 0.1 + techIndex * 0.05 }}
-                              className="group flex flex-col items-center justify-center p-3 rounded-xl hover:bg-gray-700/20 transition-all duration-300"
-                            >
-                              {/* Icon Container with Hover Effect */}
-                              <div className="relative w-12 h-12 mb-2">
-                                {/* Grey Icon (default) */}
-                                <img
-                                  src={tech.greyIcon}
-                                  alt={tech.name}
-                                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
-                                />
-                                {/* Color Icon (on hover) */}
-                                <img
-                                  src={tech.colorIcon}
-                                  alt={tech.name}
-                                  className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                                />
-                              </div>
-                              {/* Technology Name */}
-                              <span className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300 text-center">
-                                {tech.name}
-                              </span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-center h-24 text-gray-500 text-sm italic">
-                          Coming soon
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
+                              transition={{ duration: 0.8, delay: 0.3 }}
+                            />
+                          </span>
+                        </h3>
+
+                        {/* Technology Icons Grid */}
+                        {category.technologies.length > 0 ? (
+                          <div className="grid grid-cols-3 gap-3">
+                            {category.technologies.map((tech) => (
+                              <motion.div
+                                key={tech.name}
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                className="group/tech flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-700/30 transition-all duration-300 cursor-pointer"
+                              >
+                                {/* Icon Container with Hover Effect */}
+                                <div className="relative w-10 h-10 mb-2">
+                                  {/* Grey Icon (default) */}
+                                  <Image
+                                    src={tech.greyIcon}
+                                    alt={tech.name}
+                                    fill
+                                    className="object-contain transition-all duration-300 group-hover/tech:scale-110 group-hover/tech:opacity-0"
+                                  />
+                                  {/* Color Icon (on hover) */}
+                                  <Image
+                                    src={tech.colorIcon}
+                                    alt={tech.name}
+                                    fill
+                                    className="object-contain opacity-0 transition-all duration-300 scale-90 group-hover/tech:opacity-100 group-hover/tech:scale-100"
+                                  />
+                                  {/* Glow effect on hover */}
+                                  <div className="absolute inset-0 rounded-full bg-white/0 group-hover/tech:bg-white/10 group-hover/tech:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300" />
+                                </div>
+                                {/* Technology Name */}
+                                <span className="text-[10px] text-gray-400 group-hover/tech:text-white transition-all duration-300 text-center leading-tight group-hover/tech:font-medium">
+                                  {tech.name}
+                                </span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center h-24 text-gray-500 text-sm italic">
+                            Coming soon
+                          </div>
+                        )}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </section>

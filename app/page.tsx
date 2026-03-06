@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 import Loader from "./components/Loader";
 import AbstractWaveGrid from "./components/AbstractWaveGrid";
 import Image from "next/image";
@@ -10,6 +10,58 @@ import Image from "next/image";
 const FULL_NAME = "João Correia";
 // The J is already the first char; we type the rest after
 const TYPE_REST = FULL_NAME.slice(1); // "oão Correia"
+
+// Floating text component - only animates when in viewport
+function FloatingCode1() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
+  const text = "// Code in progress"
+
+  return (
+    <div ref={ref} className={`absolute top-4 left-10 text-xs text-white/30 font-mono`}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          animate={isInView ? { y: [0, -6, 0] } : { y: 0 }}
+          transition={{
+            duration: 0.4,
+            delay: i * 0.08,
+            repeat: Infinity,
+            repeatDelay: 1.5,
+            ease: "easeInOut",
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
+// Floating code snippet 2 - only animates when in view
+function FloatingCode2() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="absolute bottom-8 -right-2 text-xs text-white/30 font-mono rotate-310"
+      animate={isInView ? {
+        y: [4, -4, 4],
+        rotate: [10, 15, 10]
+      } : { y: 0, rotate: 10 }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    >
+      {`// Building solutions`}
+    </motion.div>
+  );
+}
 
 // Technology categories with icons
 const TECHNOLOGY_CATEGORIES = [
@@ -520,6 +572,7 @@ export default function Home() {
 
                       {/* Code-style decorative content */}
                       <div className="space-y-4 font-mono text-sm">
+                        <div> </div>
                         <div className="flex items-center gap-2">
                           <span className="text-pink-400">const</span>
                           <span className="text-blue-400">developer</span>
@@ -564,45 +617,12 @@ export default function Home() {
                           </div>
                         </div>
                         <div className="text-yellow-300">{`}`}</div>
-                      </div>
-
-                      {/* Animated cursor */}
-                      <motion.div
-                        className="absolute bottom-8 right-8 w-2 h-2 bg-white rounded-full"
-                        animate={{ opacity: [1, 0] }}
-                        transition={{ duration: 0.8, repeat: Infinity }}
-                      />
+                      </div>               
                     </div>
-                    {/* Floating code snippets */}
-                      <motion.div
-                        className="absolute -top-4 -right-4 text-xs text-white/30 font-mono"
-                        animate={{
-                          y: [-5, 5, -5],
-                          rotate: [-5, 5, -5]
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        {`// Code in progress`}
-                      </motion.div>
+                      {/* Floating code snippet with typing jump - only animates when visible */}
+                      <FloatingCode1 />
                       
-                      <motion.div
-                        className="absolute -bottom-4 -left-4 text-xs text-white/30 font-mono rotate-12"
-                        animate={{
-                          y: [5, -5, 5],
-                          rotate: [12, 17, 12]
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        {`// Building solutions`}
-                      </motion.div>
+                      <FloatingCode2 />
                   </motion.div>
                 </div>
 
@@ -626,6 +646,8 @@ export default function Home() {
                     <span className="text-sm text-gray-400">Let&apos;s create something amazing together</span>
                     <motion.div
                       className="w-2 h-2 bg-blue-400 rounded-full"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       animate={{ 
                         scale: [1, 1.5, 1],
                         opacity: [1, 0.5, 1]

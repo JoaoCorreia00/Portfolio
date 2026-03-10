@@ -356,7 +356,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             {/* Hero Section - Full Viewport Height */}
-            <section id="home" className="relative h-screen overflow-hidden ">
+            <section id="home" className="relative h-screen overflow-hidden hidden">
               {/* Abstract Wave Grid background - fades in after loader */}
               <motion.div
                 initial={{ opacity: 0 }}
@@ -452,7 +452,7 @@ export default function Home() {
             </section>
 
             {/* About Me Section */}
-            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60 relative overflow-hidden">
+            <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60 relative overflow-hidden hidden">
               <div className="max-w-6xl mx-auto relative z-10">
                 {/* Section Title with enhanced animation */}
                 <motion.div
@@ -726,6 +726,8 @@ export default function Home() {
                                     src={tech.greyIcon}
                                     alt={tech.name}
                                     fill
+                                    priority
+                                    unoptimized
                                     className="object-contain transition-all duration-300 group-hover/tech:scale-110 group-hover/tech:opacity-0"
                                   />
                                   {/* Color Icon (on hover) */}

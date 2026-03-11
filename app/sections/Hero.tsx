@@ -37,8 +37,10 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
           style={{ background: "linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #a0a0a0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
         >
           <span>{typedText}</span>
-          {/* Blinking cursor — hidden once typing is complete */}
-          {!isTypingDone && (
+          {/* Cursor spacing - visible during typing, replaced by invisible spacer when done */}
+          {isTypingDone ? (
+            <span className="cursor-spacing" aria-hidden="true" />
+          ) : (
             <span className="typing-cursor" aria-hidden="true" />
           )}
         </motion.h1>
@@ -107,3 +109,4 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
     </section>
   );
 }
+

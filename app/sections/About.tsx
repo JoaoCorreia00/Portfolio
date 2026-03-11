@@ -84,24 +84,10 @@ export default function About() {
                 visible: { opacity: 1 }
               }}
             >
-              {["Performance", "Architecture", "API Design", "Clean Code"].map((skill, index) => (
+              {["Performance", "Architecture", "API Design", "Clean Code"].map((skill) => (
                 <motion.span
                   key={skill}
                   className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm text-gray-300 transition-all duration-300"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 0.4 + (index * 0.1),
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    backgroundColor: "rgba(255, 255, 255, 0.15)",
-                    borderColor: "rgba(255, 255, 255, 0.5)"
-                  }}
                 >
                   {skill}
                 </motion.span>

@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
   {
     id: "1",
     title: "LusoTourism",
-    description: "A brief description of the project. This is a sample project to demonstrate the card layout.",
+    description: "A Portugal-focused tourism platform that integrates official government APIs to explore accommodations and entertainment venues. Built with Vue and TypeScript, featuring filtering, pagination, responsive design, and performance optimizations like caching.",
     technologies: ["Vue.js", "TypeScript", "Vite", "GitHub", "Postman"],
     screenshots: ["/LusoTourism_1.avif", "/LusoTourism_2.avif", "/LusoTourism_3.avif", "/LusoTourism_4.avif"],
     liveUrl: "https://joaocorreia00.github.io/LusoTourism/",
@@ -125,7 +125,7 @@ export const PROJECTS: Project[] = [
   {
     id: "2",
     title: "Cat Breed Android App",
-    description: "Another project showcase. This one has no GitHub link but has a live demo.",
+    description: "A native Android app for exploring and saving cat breeds, built with Kotlin and Jetpack Compose. Features include breed search, detailed views, local favorites with Room, and tested MVVM architecture.",
     technologies: ["Kotlin", "Android", "Jetpack Compose", "Room Database", "JUnit", "GitHub"],
     screenshots: ["/Cat_breed_1.avif", "/Cat_breed_2.avif", "/Cat_breed_3.avif"],
     githubUrlFrontend: "https://github.com/JoaoCorreia00/Cat_Breed_Android",
@@ -133,14 +133,14 @@ export const PROJECTS: Project[] = [
   {
     id: "3",
     title: "Mago Login",
-    description: "Open source project available on GitHub. No live demo for this one.",
+    description: "An enterprise authentication platform with 2FA, RBAC, and REST APIs, built with Laminas and MySQL. Focused on security, modular architecture, and scalable user management.",
     technologies: ["JavaScript" ,"PHP", "Laminas", "MySQL", "PostgreSQL", "BitBucket", "jQuery", "Bootstrap"],
     screenshots: ["/MagoLogin_1.avif", "/MagoLogin_2.avif", "/MagoLogin_3.avif", "/MagoLogin_4.avif", "/MagoLogin_5.avif"],
   },
   {
     id: "4",
     title: "Grey File Manager",
-    description: "Open source project available on GitHub. No live demo for this one.",
+    description: "A cloud-style file manager with file sharing, folder organization, and JWT authentication. Built with Node.js and Express, with strong focus on testing and fullstack architecture.",
     technologies: ["JavaScript" ,"Node.js", "Knex.js", "Jest", "PostgreSQL", "Eslint", "Docker", "GitLab", "Postman", "Figma"],
     screenshots: ["/Grey_File_1.avif", "/Grey_File_2.avif", "/Grey_File_3.avif", "/Grey_File_4.avif"],
     githubUrlFrontend: "https://github.com/JoaoCorreia00/File-Manager-Frontend",
@@ -149,7 +149,7 @@ export const PROJECTS: Project[] = [
   {
     id: "5",
     title: "Minesweeper",
-    description: "A full-stack application with both live demo and GitHub repository.",
+    description: "A Minesweeper web app built with Angular, featuring authentication, score tracking, and customizable difficulty. Includes recursive game logic and dynamic grid generation.",
     technologies: ["Angular", "TypeScript", "Firebase", "Karma"],
     screenshots: ["/Minesweeper_1.avif", "/Minesweeper_2.avif", "/Minesweeper_3.avif"],
     githubUrlFrontend: "https://github.com/JoaoCorreia00/Minesweeper",
@@ -157,7 +157,7 @@ export const PROJECTS: Project[] = [
   {
     id: "6",
     title: "Quiz App",
-    description: "A full-stack application with both live demo and GitHub repository.",
+    description: "A trivia quiz app using an external API, featuring category selection, timed gameplay, and a local high score system. Built with JavaScript and jQuery.",
     technologies: ["JavaScript", "jQuery"],
     screenshots: ["/Quiz_1.avif", "/Quiz_2.avif", "/Quiz_3.avif"],
     githubUrlFrontend: "https://github.com/JoaoCorreia00/Quiz",
@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
   {
     id: "7",
     title: "Terminal-To-Do-List-App",
-    description: "A full-stack application with both live demo and GitHub repository.",
+    description: "A CLI-based task manager built in Ruby, featuring task CRUD operations, priority levels, and JSON-based persistence.",
     technologies: ["Ruby", "Json", "GitHub"],
     screenshots: ["/Terminal_To_Do_List_1.avif", "/Terminal_To_Do_List_2.avif"],
     githubUrlBackend: "https://github.com/JoaoCorreia00/Terminal-To-Do-List-App",

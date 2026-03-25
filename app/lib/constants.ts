@@ -20,64 +20,65 @@ export const TECHNOLOGY_CATEGORIES: TechnologyCategory[] = [
   {
     name: "Frontend",
     technologies: [
-      { name: "JavaScript", colorIcon: "/Javascript.png", greyIcon: "/Javascript_grey.png" },
-      { name: "TypeScript", colorIcon: "/Typescript.png", greyIcon: "/Typescript_grey.png" },
-      { name: "Vue.js", colorIcon: "/Vue.png", greyIcon: "/Vue_grey.png" },
-      { name: "React", colorIcon: "/React.png", greyIcon: "/React_grey.png" },
-      { name: "Angular", colorIcon: "/Angular.png", greyIcon: "/Angular_grey.png" },
-      { name: "Next.js", colorIcon: "/Nextjs.png", greyIcon: "/Nextjs_grey.png" },
-      { name: "React Native", colorIcon: "/React.png", greyIcon: "/React_grey.png" },
-      { name: "HTML", colorIcon: "/Html.png", greyIcon: "/Html_grey.png" },
-      { name: "CSS", colorIcon: "/Css.png", greyIcon: "/Css_grey.png" },
-      { name: "jQuery", colorIcon: "/jQuery.png", greyIcon: "/jQuery_grey.png" },
-      { name: "TailwindCSS", colorIcon: "/TailwindCSS.png", greyIcon: "/TailwindCSS_grey.png" },
-      { name: "Bootstrap", colorIcon: "/Bootstrap.png", greyIcon: "/Bootstrap_grey.png" },
+      { name: "JavaScript", colorIcon: "/Javascript.avif", greyIcon: "/Javascript_grey.avif" },
+      { name: "TypeScript", colorIcon: "/Typescript.avif", greyIcon: "/Typescript_grey.avif" },
+      { name: "Vue.js", colorIcon: "/Vue.avif", greyIcon: "/Vue_grey.avif" },
+      { name: "React", colorIcon: "/React.avif", greyIcon: "/React_grey.avif" },
+      { name: "Angular", colorIcon: "/Angular.avif", greyIcon: "/Angular_grey.avif" },
+      { name: "Next.js", colorIcon: "/Nextjs.avif", greyIcon: "/Nextjs_grey.avif" },
+      { name: "React Native", colorIcon: "/React.avif", greyIcon: "/React_grey.avif" },
+      { name: "HTML", colorIcon: "/Html.avif", greyIcon: "/Html_grey.avif" },
+      { name: "CSS", colorIcon: "/Css.avif", greyIcon: "/Css_grey.avif" },
+      { name: "jQuery", colorIcon: "/jQuery.avif", greyIcon: "/jQuery_grey.avif" },
+      { name: "TailwindCSS", colorIcon: "/TailwindCSS.avif", greyIcon: "/TailwindCSS_grey.avif" },
+      { name: "Bootstrap", colorIcon: "/Bootstrap.avif", greyIcon: "/Bootstrap_grey.avif" },
     ],
   },
   {
     name: "Backend",
     technologies: [
-      { name: "PHP", colorIcon: "/Php.png", greyIcon: "/Php_grey.png" },
-      { name: "Node.js", colorIcon: "/Node.png", greyIcon: "/Node_grey.png" },
-      { name: "Laminas", colorIcon: "/Laminas.png", greyIcon: "/Laminas_grey.png" },
-      { name: "Zend", colorIcon: "/Zend.png", greyIcon: "/Zend_grey.png" },
-      { name: "Kotlin", colorIcon: "/Kotlin.png", greyIcon: "/Kotlin_grey.png" },
-      { name: "Ruby", colorIcon: "/Ruby.png", greyIcon: "/Ruby_grey.png" },
-      { name: "C#", colorIcon: "/C.png", greyIcon: "/C_grey.png" },
-      { name: "C++", colorIcon: "/C++.png", greyIcon: "/C++_grey.png" },
+      { name: "PHP", colorIcon: "/Php.avif", greyIcon: "/Php_grey.avif" },
+      { name: "Node.js", colorIcon: "/Node.avif", greyIcon: "/Node_grey.avif" },
+      { name: "Laminas", colorIcon: "/Laminas.avif", greyIcon: "/Laminas_grey.avif" },
+      { name: "Zend", colorIcon: "/Zend.avif", greyIcon: "/Zend_grey.avif" },
+      { name: "Kotlin", colorIcon: "/Kotlin.avif", greyIcon: "/Kotlin_grey.avif" },
+      { name: "Ruby", colorIcon: "/Ruby.avif", greyIcon: "/Ruby_grey.avif" },
+      { name: "C#", colorIcon: "/C.avif", greyIcon: "/C_grey.avif" },
+      { name: "C++", colorIcon: "/C++.avif", greyIcon: "/C++_grey.avif" },
     ],
   },
   {
     name: "Databases",
     technologies: [
-      { name: "SQL", colorIcon: "/Sql.png", greyIcon: "/Sql_grey.png" },
-      { name: "MySQL", colorIcon: "/MySql.png", greyIcon: "/MySql_grey.png" },
-      { name: "PostgreSQL", colorIcon: "/Postgresql.png", greyIcon: "/Postgresql_grey.png" },
-      { name: "XML", colorIcon: "/XML.png", greyIcon: "/XML_grey.png" },
-      { name: "Json", colorIcon: "/Json.png", greyIcon: "/Json_grey.png" },
-      { name: "Firebase", colorIcon: "/Firebase.png", greyIcon: "/Firebase_grey.png" },
+      { name: "SQL", colorIcon: "/Sql.avif", greyIcon: "/Sql_grey.avif" },
+      { name: "MySQL", colorIcon: "/MySql.avif", greyIcon: "/MySql_grey.avif" },
+      { name: "PostgreSQL", colorIcon: "/Postgresql.avif", greyIcon: "/Postgresql_grey.avif" },
+      { name: "XML", colorIcon: "/XML.avif", greyIcon: "/XML_grey.avif" },
+      { name: "Json", colorIcon: "/Json.avif", greyIcon: "/Json_grey.avif" },
+      { name: "Firebase", colorIcon: "/Firebase.avif", greyIcon: "/Firebase_grey.avif" },
     ],
   },
   {
     name: "DevOps & Cloud",
     technologies: [
-      { name: "Git", colorIcon: "/Git.png", greyIcon: "/Git_grey.png" },
-      { name: "GitHub", colorIcon: "/GitHub.png", greyIcon: "/GitHub_grey.png" },
-      { name: "GitHub Actions", colorIcon: "/GitHubActions.png", greyIcon: "/GitHubActions_grey.png" },
-      { name: "BitBucket", colorIcon: "/BitBucket.png", greyIcon: "/BitBucket_grey.png" },
-      { name: "GitLab", colorIcon: "/GitLab.png", greyIcon: "/GitLab_grey.png" },
-      { name: "Docker", colorIcon: "/Docker.png", greyIcon: "/Docker_grey.png" },
-      { name: "Jenkins", colorIcon: "/Jenkins.png", greyIcon: "/Jenkins_grey.png" },
+      { name: "Git", colorIcon: "/Git.avif", greyIcon: "/Git_grey.avif" },
+      { name: "GitHub", colorIcon: "/GitHub.avif", greyIcon: "/GitHub_grey.avif" },
+      { name: "GitHub Actions", colorIcon: "/GitHubActions.avif", greyIcon: "/GitHubActions_grey.avif" },
+      { name: "BitBucket", colorIcon: "/BitBucket.avif", greyIcon: "/BitBucket_grey.avif" },
+      { name: "GitLab", colorIcon: "/GitLab.avif", greyIcon: "/GitLab_grey.avif" },
+      { name: "Docker", colorIcon: "/Docker.avif", greyIcon: "/Docker_grey.avif" },
+      { name: "Jenkins", colorIcon: "/Jenkins.avif", greyIcon: "/Jenkins_grey.avif" },
     ],
   },
   {
     name: "Testing & Tools",
     technologies: [
-      { name: "Jest", colorIcon: "/Jest.png", greyIcon: "/Jest_grey.png" },
-      { name: "Postman", colorIcon: "/Postman.png", greyIcon: "/Postman_grey.png" },
-      { name: "ESLint", colorIcon: "/Eslint.png", greyIcon: "/Eslint_grey.png" },
-      { name: "Vite", colorIcon: "/Vite.png", greyIcon: "/Vite_grey.png" },
-      { name: "Figma", colorIcon: "/Figma.png", greyIcon: "/Figma_grey.png" },
+      { name: "Jest", colorIcon: "/Jest.avif", greyIcon: "/Jest_grey.avif" },
+      { name: "Postman", colorIcon: "/Postman.avif", greyIcon: "/Postman_grey.avif" },
+      { name: "ESLint", colorIcon: "/Eslint.avif", greyIcon: "/Eslint_grey.avif" },
+      { name: "Vite", colorIcon: "/Vite.avif", greyIcon: "/Vite_grey.avif" },
+      { name: "JUnit", colorIcon: "/JUnit.avif", greyIcon: "/JUnit_grey.avif" },
+      { name: "Figma", colorIcon: "/Figma.avif", greyIcon: "/Figma_grey.avif" },
     ],
   },
 ];
@@ -98,3 +99,76 @@ export const NAV_ITEMS: NavItem[] = [
 
 // Type for active section
 export type SectionId = "home" | "about" | "skills" | "projects" | "contact";
+
+// Project data for Projects section
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  screenshots: string[];
+  liveUrl?: string;
+  githubUrlFrontend?: string;
+  githubUrlBackend?: string;
+}
+
+export const PROJECTS: Project[] = [
+  {
+    id: "1",
+    title: "LusoTourism",
+    description: "A brief description of the project. This is a sample project to demonstrate the card layout.",
+    technologies: ["Vue.js", "TypeScript", "Vite", "GitHub", "Postman"],
+    screenshots: ["/LusoTourism_1.avif", "/LusoTourism_2.avif", "/LusoTourism_3.avif", "/LusoTourism_4.avif"],
+    liveUrl: "https://joaocorreia00.github.io/LusoTourism/",
+    githubUrlFrontend: "https://github.com/JoaoCorreia00/LusoTourism",
+  },
+  {
+    id: "2",
+    title: "Cat Breed Android App",
+    description: "Another project showcase. This one has no GitHub link but has a live demo.",
+    technologies: ["Kotlin", "Android", "Jetpack Compose", "Room Database", "JUnit", "GitHub"],
+    screenshots: ["/Cat_breed_1.avif", "/Cat_breed_2.avif", "/Cat_breed_3.avif"],
+    githubUrlFrontend: "https://github.com/JoaoCorreia00/Cat_Breed_Android",
+  },
+  {
+    id: "3",
+    title: "Mago Login",
+    description: "Open source project available on GitHub. No live demo for this one.",
+    technologies: ["JavaScript" ,"PHP", "Laminas", "MySQL", "PostgreSQL", "BitBucket", "jQuery", "Bootstrap"],
+    screenshots: ["/MagoLogin_1.avif", "/MagoLogin_2.avif", "/MagoLogin_3.avif", "/MagoLogin_4.avif", "/MagoLogin_5.avif"],
+  },
+  {
+    id: "4",
+    title: "Grey File Manager",
+    description: "Open source project available on GitHub. No live demo for this one.",
+    technologies: ["JavaScript" ,"Node.js", "Knex.js", "Jest", "PostgreSQL", "Eslint", "Docker", "GitLab", "Postman", "Figma"],
+    screenshots: ["/Grey_File_1.avif", "/Grey_File_2.avif", "/Grey_File_3.avif", "/Grey_File_4.avif"],
+    githubUrlFrontend: "https://github.com/JoaoCorreia00/File-Manager-Frontend",
+    githubUrlBackend: "https://github.com/JoaoCorreia00/File-Manager-API",
+  },
+  {
+    id: "5",
+    title: "Minesweeper",
+    description: "A full-stack application with both live demo and GitHub repository.",
+    technologies: ["Angular", "TypeScript", "Firebase", "Karma"],
+    screenshots: ["/Minesweeper_1.avif", "/Minesweeper_2.avif", "/Minesweeper_3.avif"],
+    githubUrlFrontend: "https://github.com/JoaoCorreia00/Minesweeper",
+  },
+  {
+    id: "6",
+    title: "Quiz App",
+    description: "A full-stack application with both live demo and GitHub repository.",
+    technologies: ["JavaScript", "jQuery"],
+    screenshots: ["/Quiz_1.avif", "/Quiz_2.avif", "/Quiz_3.avif"],
+    githubUrlFrontend: "https://github.com/JoaoCorreia00/Quiz",
+  },
+  {
+    id: "7",
+    title: "Terminal-To-Do-List-App",
+    description: "A full-stack application with both live demo and GitHub repository.",
+    technologies: ["Ruby", "Json", "GitHub"],
+    screenshots: ["/Terminal_To_Do_List_1.avif", "/Terminal_To_Do_List_2.avif"],
+    githubUrlBackend: "https://github.com/JoaoCorreia00/Terminal-To-Do-List-App",
+  },
+];
+  

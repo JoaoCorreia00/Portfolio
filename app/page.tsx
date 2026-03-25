@@ -8,6 +8,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
+import Projects from "./sections/Projects";
 import { TYPE_REST, SectionId } from "./lib/constants";
 
 export default function Home() {
@@ -111,6 +112,9 @@ export default function Home() {
 
             {/* Technologies / Skills Section */}
             <Skills />
+
+            {/* Projects Section */}
+            <Projects />
           </motion.div>
         )}
       </AnimatePresence>

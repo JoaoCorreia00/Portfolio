@@ -5,7 +5,7 @@ import { FloatingCode1, FloatingCode2 } from "../components/FloatingCode";
 
 export default function About() {
   return (
-    <section id="about" className="min-h-screen text-white px-8 md:px-20 py-60 relative overflow-hidden">
+    <section id="about" className="min-h-screen text-white px-8 md:px-20 py-45 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title with enhanced animation */}
         <motion.div

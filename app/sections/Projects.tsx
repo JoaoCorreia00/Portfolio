@@ -50,17 +50,6 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
-
-        {/* Project Count */}
-        <motion.p
-          className="text-center text-gray-500 text-sm mt-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-        >
-          {PROJECTS.length} project{PROJECTS.length !== 1 ? 's' : ''} showcased
-        </motion.p>
       </div>
     </section>
   );

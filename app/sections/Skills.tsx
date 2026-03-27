@@ -26,6 +26,10 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           />
+          <p className="text-gray-400 mt-4 max-w-2xl text-sm sm:text-base">
+            A collection of technologies I&apos;ve worked with, showcasing my skills in full-stack development,
+            design, and problem-solving.
+          </p>
         </motion.div>
 
         {/* Technology Categories Grid - Enhanced Layout */}

@@ -34,20 +34,8 @@ export default function Projects() {
 
         {/* Projects Grid - Responsive layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {PROJECTS.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: "easeOut" 
-              }}
-            >
-              <ProjectCard project={project} />
-            </motion.div>
+          {PROJECTS.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>

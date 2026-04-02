@@ -26,9 +26,12 @@ export default function AbstractWaveGrid() {
     let animationId: number;
     let time = 0;
     let isRunning = true;
+    let lastFrameTime = 0;
+    const FPS_LIMIT = 30;
+    const FRAME_INTERVAL = 1000 / FPS_LIMIT;
 
-    const COLS = 20;
-    const ROWS = 20;
+    const COLS = 12;
+    const ROWS = 12;
     const WAVE_AMPLITUDE = 30;
     const WAVE_SPEED = 0.012;
 
@@ -111,24 +114,14 @@ export default function AbstractWaveGrid() {
           // Multi-layered wave for more organic movement
           const wave =
             Math.sin(nx * 3.5 + nz * 2.8 + time * 1.4) * WAVE_AMPLITUDE +
-            Math.sin(nx * 1.8 - nz * 3.2 + time * 0.9) *
-              WAVE_AMPLITUDE *
-              0.45 +
-            Math.sin(nx * 5.0 + nz * 1.5 - time * 1.1) *
-              WAVE_AMPLITUDE *
-              0.25 +
-            Math.sin(nx * 2.2 + nz * 4.0 + time * 0.6) * WAVE_AMPLITUDE * 0.15;
+            Math.sin(nx * 1.8 - nz * 3.2 + time * 0.9) * WAVE_AMPLITUDE * 0.45;
 
           pts[c][r] = project(nx, nz, wave, w, h);
         }
       }
 
       // ── Enhanced background gradient ─────────────────
-      const bgGradient = cx.createLinearGradient(0, 0, 0, h);
-      bgGradient.addColorStop(0, `hsla(${baseHue - 15}, 60%, 8%, 0.03)`);
-      bgGradient.addColorStop(0.5, `hsla(${baseHue}, 50%, 5%, 0.02)`);
-      bgGradient.addColorStop(1, `hsla(${baseHue + 10}, 40%, 3%, 0.04)`);
-      cx.fillStyle = bgGradient;
+      cx.fillStyle = 'rgba(13, 15, 20, 0.15)';  // Simple fallback
       cx.fillRect(0, 0, w, h);
 
       // ── Horizontal lines with enhanced glow ─────────
@@ -242,7 +235,7 @@ export default function AbstractWaveGrid() {
 
       // ── Scanline effect for depth (subtle) ────────────
       cx.fillStyle = `rgba(0, 0, 0, 0.015)`;
-      for (let i = 0; i < h; i += 3) {
+      for (let i = 0; i < h; i += 6) {
         cx.fillRect(0, i, w, 1);
       }
 
@@ -256,7 +249,16 @@ export default function AbstractWaveGrid() {
 
       time += WAVE_SPEED;
       if (isRunning) {
-        animationId = requestAnimationFrame(draw);
+        const currentTime = performance.now();
+        const elapsed = currentTime - lastFrameTime;
+        
+        if (elapsed >= FRAME_INTERVAL) {
+          lastFrameTime = currentTime - (elapsed % FRAME_INTERVAL);
+          animationId = requestAnimationFrame(draw);
+        } else {
+          // Schedule check for next frame interval
+          animationId = requestAnimationFrame(draw);
+        }
       }
     }
 

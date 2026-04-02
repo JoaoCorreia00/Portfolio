@@ -91,20 +91,30 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
         animate={{ opacity: hasScrolled ? 0 : 1 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.div
-          className="flex flex-col items-center"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <motion.div
-              className="w-1 h-2 bg-white rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+        {/* Only animate when not scrolled */}
+        {hasScrolled ? (
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+              <div className="w-1 h-2 bg-white rounded-full mt-2" />
+            </div>
+            <span className="text-xs mt-2">Scroll</span>
           </div>
-          <span className="text-xs mt-2">Scroll</span>
-        </motion.div>
+        ) : (
+          <motion.div
+            className="flex flex-col items-center"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+              <motion.div
+                className="w-1 h-2 bg-white rounded-full mt-2"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+            <span className="text-xs mt-2">Scroll</span>
+          </motion.div>
+        )}
       </motion.div>
     </section>
   );

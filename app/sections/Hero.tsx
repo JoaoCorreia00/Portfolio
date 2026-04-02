@@ -11,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps) {
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
+    <section id="home" className="relative h-screen overflow-hidden section-boundary">
       {/* Abstract Wave Grid background - fades in after loader */}
       <motion.div
         initial={{ opacity: 0 }}

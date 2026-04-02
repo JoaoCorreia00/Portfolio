@@ -38,13 +38,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <div className="group relative bg-gradient-to-br from-gray-800/40 to-gray-900/60 rounded-2xl border border-gray-700/40 backdrop-blur-md overflow-hidden hover:border-gray-500/60 transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
+    <div className="group relative bg-[#161d27] rounded-2xl border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500">
       {/* Main Content Grid */}
       <div className={`flex flex-col ${isMobile ? 'lg:flex-row' : 'lg:flex-col'}`}>
         
         {/* Screenshot Section - Takes more space for mobile to show phone-like aspect */}
         <div className={`
-          relative overflow-hidden bg-gray-900/50 
+          relative overflow-hidden bg-[#0a0e14] 
           ${isMobile ? 'lg:w-1/2 lg:min-h-[610px]' : 'w-full h-64 lg:h-[320px]'}
         `}>
           <Image

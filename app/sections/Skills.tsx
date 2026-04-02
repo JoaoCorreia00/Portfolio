@@ -6,7 +6,7 @@ import { TECHNOLOGY_CATEGORIES } from "../lib/constants";
 
 export default function Skills() {
   return (
-    <section id="skills" className="min-h-screen text-white px-6 md:px-16 py-40">
+    <section id="skills" className="text-white px-6 md:px-16 py-20 section-boundary">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div
@@ -50,13 +50,8 @@ export default function Skills() {
                 key={category.name}
                 className={`group relative bg-gradient-to-br ${colors.gradient} to-gray-900/40 rounded-2xl p-6 border ${colors.border} backdrop-blur-md hover:border-opacity-60 transition-all duration-500 hover:scale-[1.02] ${colors.glow} hover:shadow-lg`}
               >
-                {/* Subtle animated background pattern */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.03),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_70%)] transition-all duration-500" />
-                </div>
-
                 {/* Category Title */}
-                <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-gray-700/40 pb-3 relative">
+                <h3 className="text-xl font-semibold mb-6 text-center text-gray-200 border-b border-white/10 pb-3 relative">
                   <span className="relative">
                     {category.name}
                     <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:w-[60%] transition-all duration-300" />
@@ -69,7 +64,7 @@ export default function Skills() {
                     {category.technologies.map((tech) => (
                       <div
                         key={tech.name}
-                        className="group/tech flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-700/30 transition-all duration-300 cursor-pointer"
+                        className="group/tech flex flex-col items-center justify-center p-2 rounded-xl hover:bg-[#1c2532] transition-all duration-300 cursor-pointer"
                       >
                         {/* Icon Container with Hover Effect */}
                         <div className="relative w-10 h-10 mb-2">

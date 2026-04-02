@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="min-h-screen text-white px-8 md:px-20 py-45 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="about" className="text-white px-8 md:px-20 py-20 section-boundary">
+      <div className="max-w-7xl mx-auto">
         {/* Section Title with enhanced animation */}
         <motion.div
           className="mb-16"
@@ -51,7 +51,7 @@ export default function About() {
               {["Performance", "Architecture", "API Design", "Clean Code"].map((skill) => (
                 <span
                   key={skill}
-                  className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm text-gray-300 transition-all duration-300"
+                  className="px-4 py-2 bg-[#161d27] border border-white/10 rounded-full text-sm text-gray-300 transition-all duration-300 hover:bg-[#1c2532] hover:border-white/20"
                 >
                   {skill}
                 </span>
@@ -62,7 +62,7 @@ export default function About() {
           {/* Right Column - Visual Element */}
           <div className="relative">
             {/* Code card */}
-            <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+            <div className="relative bg-[#161d27] rounded-2xl p-8 border border-white/10">
 
               {/* Code-style decorative content */}
               <div className="space-y-4 font-mono text-sm">

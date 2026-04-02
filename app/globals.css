@@ -1,30 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f14;
-  --foreground: #0b0f14;
+  --bg-deep: #080b10;
+  --bg-section: #0b0f16;
+  
+  --bg-card: #12181f;
+  --bg-card-hover: #1a222d;
+  
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-visible: rgba(255, 255, 255, 0.12);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-deep);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
-/* Prevent layout shift and flickering with framer-motion animations */
+section {
+  position: relative;
+  background: var(--bg-section);
+}
+
+.section-boundary {
+  position: relative;
+}
+
+.section-boundary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--border-visible) 20%, 
+    var(--border-visible) 80%, 
+    transparent 100%
+  );
+}
+
 .motion-div, [class*="motion-"] {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
-/* Ensure sections have proper stacking context */
-section {
-  position: relative;
-  transform: translateZ(0);
-}
-
-/* Typing cursor for the title animation */
 .typing-cursor {
   display: inline-block;
   width: 3px;
@@ -36,10 +65,9 @@ section {
   animation: blink 0.90s step-end infinite;
 }
 
-/* Spacing to replace cursor when typing is done - keeps text centered */
 .cursor-spacing {
   display: inline-block;
-  width: 7px; /* Matches cursor width (3px) + margin-left (4px) */
+  width: 7px;
   height: 0.85em;
   vertical-align: middle;
 }
@@ -47,4 +75,11 @@ section {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 50%, #64748b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

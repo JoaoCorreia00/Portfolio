@@ -10,6 +10,7 @@ import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
+import Footer from "./components/Footer";
 import { TYPE_REST, SectionId } from "./lib/constants";
 
 export default function Home() {
@@ -119,6 +120,9 @@ export default function Home() {
 
             {/* Contact Section */}
             <Contact />
+
+            {/* Footer */}
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>

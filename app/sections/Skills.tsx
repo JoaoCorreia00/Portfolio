@@ -6,7 +6,7 @@ import { TECHNOLOGY_CATEGORIES } from "../lib/constants";
 
 export default function Skills() {
   return (
-    <section id="skills" className="text-white px-6 md:px-16 py-20 section-boundary">
+    <section id="skills" className="text-white px-6 md:px-16 py-30 section-boundary">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div

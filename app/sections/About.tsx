@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="text-white px-8 md:px-20 py-20 section-boundary">
+    <section id="about" className="text-white px-8 md:px-20 py-30 section-boundary">
       <div className="max-w-7xl mx-auto">
         {/* Section Title with enhanced animation */}
         <motion.div

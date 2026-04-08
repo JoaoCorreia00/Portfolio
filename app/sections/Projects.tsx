@@ -6,7 +6,7 @@ import ProjectCard from "../components/ProjectCard";
 
 export default function Projects() {
   return (
-    <section id="projects" className="text-white px-4 sm:px-6 md:px-12 lg:px-16 py-20 section-boundary">
+    <section id="projects" className="text-white px-4 sm:px-6 md:px-12 lg:px-16 py-30 section-boundary">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div

@@ -37,7 +37,7 @@ export default function Contact() {
     }
   };
   return (
-    <section id="contact" className="text-white px-8 md:px-20 py-20 section-boundary">
+    <section id="contact" className="text-white px-8 md:px-20 py-30 section-boundary">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="mb-16"

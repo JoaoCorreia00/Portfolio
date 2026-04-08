@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { Mail, Phone, Github, Linkedin, Loader2, CheckCircle } from "lucide-react";
 
 export default function Contact() {

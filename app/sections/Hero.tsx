@@ -67,10 +67,18 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 1.5 }}
         >
-          <button className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105">
+          <button 
+            className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
+            onClick={() => {
+              window.open('/CV_JoaoCorreia.pdf', '_blank');
+            }}
+          >
             Download CV
           </button>
-          <button className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 hover:scale-105">
+          <button
+            className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 hover:scale-105"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Contact
           </button>
         </motion.div>

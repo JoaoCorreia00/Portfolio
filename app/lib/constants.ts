@@ -55,6 +55,7 @@ export const TECHNOLOGY_CATEGORIES: TechnologyCategory[] = [
       { name: "PostgreSQL", colorIcon: "/Postgresql.avif", greyIcon: "/Postgresql_grey.avif" },
       { name: "XML", colorIcon: "/XML.avif", greyIcon: "/XML_grey.avif" },
       { name: "Json", colorIcon: "/Json.avif", greyIcon: "/Json_grey.avif" },
+      { name: "YAML", colorIcon: "/YAML.avif", greyIcon: "/YAML_grey.avif" },
       { name: "Firebase", colorIcon: "/Firebase.avif", greyIcon: "/Firebase_grey.avif" },
     ],
   },

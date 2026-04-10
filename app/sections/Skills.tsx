@@ -72,6 +72,7 @@ export default function Skills() {
                           <Image
                             src={tech.greyIcon}
                             alt={tech.name}
+                            sizes="40px"
                             fill
                             priority
                             unoptimized
@@ -81,6 +82,7 @@ export default function Skills() {
                           <Image
                             src={tech.colorIcon}
                             alt={tech.name}
+                            sizes="40px"
                             fill
                             className="object-contain opacity-0 transition-all duration-300 scale-90 group-hover/tech:opacity-100 group-hover/tech:scale-100"
                           />

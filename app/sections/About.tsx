@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="text-white px-8 md:px-20 py-30 section-boundary">
+    <section id="about" className="text-white px-8 md:px-20 py-[var(--section-padding)] section-boundary">
       <div className="max-w-7xl mx-auto">
         {/* Section Title with enhanced animation */}
         <motion.div
@@ -14,8 +14,8 @@ export default function About() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">Me</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            About <span>Me</span>
           </h2>
           <motion.div
             className="w-32 h-[3px] bg-gradient-to-r from-white via-blue-400 to-transparent rounded-full"

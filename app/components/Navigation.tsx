@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS, SectionId } from "../lib/constants";
 
@@ -9,12 +10,19 @@ interface NavigationProps {
 }
 
 export default function Navigation({ isLoading, activeSection }: NavigationProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const scrollToSection = (href: string) => {
     const id = href.replace("#", "");
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false); // Close mobile menu after navigation
     }
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -55,34 +63,70 @@ export default function Navigation({ isLoading, activeSection }: NavigationProps
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-white p-2"
-              onClick={() => {
-                const menu = document.getElementById("mobile-menu");
-                menu?.classList.toggle("hidden");
-              }}
+              className="md:hidden text-white p-2 relative z-50"
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <motion.div
+                animate={isMobileMenuOpen ? "open" : "closed"}
+                className="w-6 h-6 relative"
+              >
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: 45, y: 8 }
+                  }}
+                  className="absolute top-0 left-0 w-6 h-0.5 bg-white block transform origin-center transition-all duration-300"
+                />
+                <motion.span
+                  variants={{
+                    closed: { opacity: 1 },
+                    open: { opacity: 0 }
+                  }}
+                  className="absolute top-2 left-0 w-6 h-0.5 bg-white block transform transition-all duration-300"
+                />
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: -45, y: -8 }
+                  }}
+                  className="absolute top-4 left-0 w-6 h-0.5 bg-white block transform origin-center transition-all duration-300"
+                />
+              </motion.div>
             </button>
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md mt-2 py-4 px-6">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left py-2 text-sm font-medium ${
-                  activeSection === item.href.replace("#", "")
-                    ? "text-white"
-                    : "text-gray-400"
-                }`}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-white/10 mt-2 py-6 px-6 shadow-2xl"
               >
-                {item.label}
-              </button>
-            ))}
-          </div>
+                <nav className="flex flex-col space-y-4">
+                  {NAV_ITEMS.map((item, index) => (
+                    <motion.button
+                      key={item.href}
+                      onClick={() => scrollToSection(item.href)}
+                      className={`text-left py-3 px-4 rounded-lg transition-all duration-300 ${
+                        activeSection === item.href.replace("#", "")
+                          ? "text-white bg-white/10 border-l-4 border-blue-400"
+                          : "text-gray-400 hover:text-white hover:bg-white/5"
+                      }`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <span className="text-lg font-medium">{item.label}</span>
+                    </motion.button>
+                  ))}
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.nav>
       )}
     </AnimatePresence>

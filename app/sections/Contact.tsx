@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { Mail, Phone, Github, Linkedin, Loader2, CheckCircle } from "lucide-react";
 
@@ -10,14 +10,49 @@ export default function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [error, setError] = useState("");
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({});
+
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {};
+    const formData = new FormData(formRef.current!);
+
+    const from_name = formData.get('from_name') as string;
+    const from_email = formData.get('from_email') as string;
+    const message = formData.get('message') as string;
+
+    if (!from_name?.trim()) {
+      errors.from_name = "Name is required";
+    }
+
+    if (!from_email?.trim()) {
+      errors.from_email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from_email)) {
+      errors.from_email = "Please enter a valid email address";
+    }
+
+    if (!message?.trim()) {
+      errors.message = "Message is required";
+    } else if (message.trim().length < 10) {
+      errors.message = "Message must be at least 10 characters long";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formRef.current) return;
+
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
 
     setIsSending(true);
     setError("");
+    setFormErrors({});
 
     try {
       await emailjs.sendForm(
@@ -28,16 +63,27 @@ export default function Contact() {
       );
       setIsSent(true);
       formRef.current.reset();
-      setTimeout(() => setIsSent(false), 3000);
-    } catch (err) {
-      setError("Failed to send message. Please try again.");
+      setFormErrors({});
+      setTimeout(() => setIsSent(false), 5000); // Extended success message duration
+    } catch (err: unknown) {
       console.error(err);
+      // More detailed error messages based on error type
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
+        setError("Network error. Please check your connection and try again.");
+      } else if (errorMessage.includes('rate') || errorMessage.includes('limit')) {
+        setError("Too many requests. Please wait a moment before trying again.");
+      } else if (errorMessage.includes('service') || errorMessage.includes('template')) {
+        setError("Service temporarily unavailable. Please try again later.");
+      } else {
+        setError("Failed to send message. Please try again or contact me directly via email.");
+      }
     } finally {
       setIsSending(false);
     }
   };
   return (
-    <section id="contact" className="text-white px-8 md:px-20 py-30 section-boundary">
+    <section id="contact" className="text-white px-8 md:px-20 py-[var(--section-padding)] section-boundary">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="mb-16"
@@ -47,7 +93,7 @@ export default function Contact() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">Me</span>
+            Contact <span>Me</span>
           </h2>
           <motion.div
             className="w-32 h-[3px] bg-gradient-to-r from-white via-blue-400 to-transparent rounded-full"
@@ -65,7 +111,7 @@ export default function Contact() {
             </h3>
             
             <p className="text-lg text-gray-400 leading-relaxed mb-10">
-              Feel free to reach out for collaborations, opportunities, or just to say hello. 
+                Feel free to reach out for collaborations, opportunities, or just to say hello.
               I&apos;m always open to discussing new projects and ideas.
             </p>
 
@@ -103,51 +149,131 @@ export default function Contact() {
             </h3>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="from_name" className="block text-sm text-gray-500 mb-3">
-                  Name
-                </label>
+              <div className="relative">
                 <input
                   type="text"
                   id="from_name"
                   name="from_name"
                   required
                   placeholder="Your name"
-                  className="w-full px-5 py-4 bg-[#161d27] border border-white/10 rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all duration-300"
+                  className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 pt-6 pb-2 ${
+                    formErrors.from_name
+                      ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"
+                      : "border-white/10 focus:border-blue-500/50 focus:ring-blue-500/50"
+                  }`}
                 />
+                <motion.label
+                  htmlFor="from_name"
+                  className={`absolute left-5 text-sm transition-all duration-300 pointer-events-none ${
+                    formErrors.from_name ? "text-red-400" : "text-gray-500"
+                  }`}
+                  animate={{
+                    top: "8px",
+                    fontSize: "14px"
+                  }}
+                >
+                  Name
+                </motion.label>
+                {formErrors.from_name && (
+                  <p className="text-red-400 text-sm mt-1">{formErrors.from_name}</p>
+                )}
               </div>
 
-              <div>
-                <label htmlFor="from_email" className="block text-sm text-gray-500 mb-3">
-                  Email
-                </label>
+              <div className="relative">
                 <input
                   type="email"
                   id="from_email"
                   name="from_email"
                   required
                   placeholder="your.email@example.com"
-                  className="w-full px-5 py-4 bg-[#161d27] border border-white/10 rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all duration-300"
+                  className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 pt-6 pb-2 ${
+                    formErrors.from_email
+                      ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"
+                      : "border-white/10 focus:border-blue-500/50 focus:ring-blue-500/50"
+                  }`}
                 />
+                <motion.label
+                  htmlFor="from_email"
+                  className={`absolute left-5 text-sm transition-all duration-300 pointer-events-none ${
+                    formErrors.from_email ? "text-red-400" : "text-gray-500"
+                  }`}
+                  animate={{
+                    top: "8px",
+                    fontSize: "14px"
+                  }}
+                >
+                  Email
+                </motion.label>
+                {formErrors.from_email && (
+                  <p className="text-red-400 text-sm mt-1">{formErrors.from_email}</p>
+                )}
               </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm text-gray-500 mb-3">
-                  Message
-                </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
                   placeholder="Your message here..."
-                  className="w-full px-5 py-4 bg-[#161d27] border border-white/10 rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all duration-300 resize-none"
+                  className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 resize-none pt-6 pb-2 ${
+                    formErrors.message
+                      ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"
+                      : "border-white/10 focus:border-blue-500/50 focus:ring-blue-500/50"
+                  }`}
                 />
+                <motion.label
+                  htmlFor="message"
+                  className={`absolute left-5 top-4 text-sm transition-all duration-300 pointer-events-none ${
+                    formErrors.message ? "text-red-400" : "text-gray-500"
+                  }`}
+                  animate={{
+                    top: "8px",
+                    fontSize: "14px"
+                  }}
+                >
+                  Message
+                </motion.label>
+                {formErrors.message && (
+                  <p className="text-red-400 text-sm mt-1">{formErrors.message}</p>
+                )}
               </div>
 
+              {/* Global error message */}
               {error && (
-                <p className="text-red-400 text-sm">{error}</p>
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl"
+                >
+                  <p className="text-red-400 text-sm">{error}</p>
+                </motion.div>
               )}
+
+              {/* Success message with enhanced animation */}
+              <AnimatePresence>
+                {isSent && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center gap-3"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+                    >
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    </motion.div>
+                    <div>
+                      <p className="text-green-400 font-medium text-sm">Message sent successfully!</p>
+                      <p className="text-green-400/80 text-xs">I&apos;ll get back to you soon.</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <motion.button
                 type="submit"

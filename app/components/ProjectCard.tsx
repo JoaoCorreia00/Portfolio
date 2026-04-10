@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Project } from "../lib/constants";
 
@@ -14,8 +15,9 @@ const isMobileProject = (screenshots: string[]) => {
   return screenshots.some(s => s.toLowerCase().includes("cat_breed"));
 };
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default React.memo(function ProjectCard({ project }: ProjectCardProps) {
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true);
   const hasMultipleScreenshots = project.screenshots.length > 1;
   const isMobile = isMobileProject(project.screenshots);
 
@@ -38,7 +40,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <div className="group relative bg-[#161d27] rounded-2xl border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500">
+    <motion.div
+      className="group relative bg-[#161d27] rounded-2xl border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500 cursor-pointer"
+      whileHover={{ scale: 1.04 }}
+      role="article"
+      aria-labelledby={`project-title-${project.id}`}
+    >
       {/* Main Content Grid */}
       <div className={`flex flex-col ${isMobile ? 'lg:flex-row' : 'lg:flex-col'}`}>
         
@@ -47,14 +54,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           relative overflow-hidden bg-[#0a0e14] 
           ${isMobile ? 'lg:w-1/2 lg:min-h-[610px]' : 'w-full h-64 lg:h-[320px]'}
         `}>
-          <Image
-            src={project.screenshots[currentScreenshot]}
-            alt={`${project.title} screenshot ${currentScreenshot + 1}`}
-            fill
-            className="object-fill"
-            priority
-            unoptimized
-          />
+          <motion.div
+            className="w-full h-full relative overflow-hidden"
+          >
+            {imageLoading && (
+              <div className="absolute inset-0 bg-[#0a0e14] flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-white/20 border-t-white/60 rounded-full animate-spin"></div>
+              </div>
+            )}
+            <Image
+              src={project.screenshots[currentScreenshot]}
+              alt={`${project.title} screenshot ${currentScreenshot + 1}`}
+              fill
+              priority
+              unoptimized
+              onLoad={() => setImageLoading(false)}
+              onError={() => setImageLoading(false)}
+            />
+          </motion.div>
 
           {/* Carousel Controls */}
           {hasMultipleScreenshots && (
@@ -118,9 +135,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className={`p-5 lg:p-6 flex flex-col ${isMobile ? 'lg:w-1/2' : 'w-full'}`}>
           {/* Title & Description */}
           <div className="mb-4">
-            <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
-              {project.title}
-            </h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 id={`project-title-${project.id}`} className="text-xl lg:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
+                {project.title}
+              </h3>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {project.description}
             </p>
@@ -208,6 +227,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
-}
+});

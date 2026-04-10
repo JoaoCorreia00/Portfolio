@@ -1,83 +1,39 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import Navigation from "./components/Navigation";
 import ScrollProgress from "./components/ScrollProgress";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Skills from "./sections/Skills";
-import Projects from "./sections/Projects";
-import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
-import { TYPE_REST, SectionId } from "./lib/constants";
+import { useScrollProgress } from "./hooks/useScrollProgress";
+import { useTypingAnimation } from "./hooks/useTypingAnimation";
+
+// Lazy load heavy sections for better performance
+const Hero = lazy(() => import("./sections/Hero"));
+const About = lazy(() => import("./sections/About"));
+const Skills = lazy(() => import("./sections/Skills"));
+const Projects = lazy(() => import("./sections/Projects"));
+const Contact = lazy(() => import("./sections/Contact"));
+
+// Loading fallback component
+const SectionLoader = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="w-8 h-8 border-2 border-white/20 border-t-white/60 rounded-full animate-spin"></div>
+  </div>
+);
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [typedText, setTypedText] = useState("J");
-  const [isTypingDone, setIsTypingDone] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState<SectionId>("home");
+
+  // Custom hooks for cleaner component logic
+  const { scrollProgress, activeSection, hasScrolled } = useScrollProgress();
+  const { typedText, isTypingDone } = useTypingAnimation(isLoading);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 4500);
     return () => clearTimeout(timer);
   }, []);
-
-  // Detect scroll for progress and active section
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-      
-      setScrollProgress(progress);
-      
-      if (scrollY > 50 && !hasScrolled) {
-        setHasScrolled(true);
-      }
-
-      // Determine active section
-      const sections: SectionId[] = ["home", "about", "skills", "projects", "contact"];
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasScrolled]);
-
-  // Start typing animation once loader is gone
-  useEffect(() => {
-    if (isLoading) return;
-
-    // Wait for the J entrance animation to finish before typing starts
-    let charIndex = 0;
-    const typingDelay = setTimeout(() => {
-      const interval = setInterval(() => {
-        charIndex++;
-        setTypedText("J" + TYPE_REST.slice(0, charIndex));
-        if (charIndex === TYPE_REST.length) {
-          clearInterval(interval);
-          // Remove cursor after a short pause
-          setTimeout(() => setIsTypingDone(true), 600);
-        }
-      }, 80); // ~80ms per character
-      return () => clearInterval(interval);
-    }, 900); // let the J entrance animation finish first (~0.8s)
-
-    return () => clearTimeout(typingDelay);
-  }, [isLoading]);
 
   return (
     <>
@@ -93,7 +49,7 @@ export default function Home() {
         activeSection={activeSection} 
       />
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!isLoading && (
           <motion.div
             key="content"
@@ -103,26 +59,75 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             {/* Hero Section - Full Viewport Height */}
-            <Hero 
-              typedText={typedText} 
-              isTypingDone={isTypingDone} 
-              hasScrolled={hasScrolled}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <Hero
+                typedText={typedText}
+                isTypingDone={isTypingDone}
+                hasScrolled={hasScrolled}
+              />
+            </motion.div>
 
             {/* About Me Section */}
-            <About />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Suspense fallback={<SectionLoader />}>
+                <About />
+              </Suspense>
+            </motion.div>
 
             {/* Technologies / Skills Section */}
-            <Skills />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Suspense fallback={<SectionLoader />}>
+                <Skills />
+              </Suspense>
+            </motion.div>
 
             {/* Projects Section */}
-            <Projects />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Suspense fallback={<SectionLoader />}>
+                <Projects />
+              </Suspense>
+            </motion.div>
 
             {/* Contact Section */}
-            <Contact />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Suspense fallback={<SectionLoader />}>
+                <Contact />
+              </Suspense>
+            </motion.div>
 
             {/* Footer */}
-            <Footer />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Footer />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

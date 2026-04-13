@@ -12,32 +12,51 @@ export default function Contact() {
   const [error, setError] = useState("");
   const [formErrors, setFormErrors] = useState<{[key: string]: string}>({});
 
-  const validateForm = () => {
+  const validation: boolean[] = [false, false, false]
+
+  const validateField = (fieldName: string, value: string) => {
     const errors: {[key: string]: string} = {};
-    const formData = new FormData(formRef.current!);
 
-    const from_name = formData.get('from_name') as string;
-    const from_email = formData.get('from_email') as string;
-    const message = formData.get('message') as string;
-
-    if (!from_name?.trim()) {
-      errors.from_name = "Name is required";
+    validation[0] = false
+    validation[1] = false
+    validation[2] = false
+    
+    switch (fieldName) {
+      case 'from_name':
+        if (!value.trim()) {
+          errors.from_name = "Name is required";
+        } else if (value.trim().length < 2) {
+          errors.from_name = "Name must be at least 2 characters";
+        }
+        else {
+          validation[0] = true
+        }
+        break;
+        
+      case 'from_email':
+        if (!value.trim()) {
+          errors.from_email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errors.from_email = "Please enter a valid email address";
+        }
+        else {
+          validation[1] = true
+        }
+        break;
+        
+      case 'message':
+        if (!value.trim()) {
+          errors.message = "Message is required";
+        } else if (value.trim().length < 10) {
+          errors.message = "Message must be at least 10 characters long";
+        }
+        else {
+          validation[2] = true
+        }
+        break;
     }
-
-    if (!from_email?.trim()) {
-      errors.from_email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from_email)) {
-      errors.from_email = "Please enter a valid email address";
-    }
-
-    if (!message?.trim()) {
-      errors.message = "Message is required";
-    } else if (message.trim().length < 10) {
-      errors.message = "Message must be at least 10 characters long";
-    }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    
+    return errors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +65,7 @@ export default function Contact() {
     if (!formRef.current) return;
 
     // Validate form before submission
-    if (!validateForm()) {
+    if (validation[0] === false || validation[1] === false || validation[2] === false) {
       return;
     }
 
@@ -82,6 +101,7 @@ export default function Contact() {
       setIsSending(false);
     }
   };
+  
   return (
     <section id="contact" className="text-white px-8 md:px-20 py-[var(--section-padding)] section-boundary">
       <div className="max-w-7xl mx-auto">
@@ -156,6 +176,14 @@ export default function Contact() {
                   name="from_name"
                   required
                   placeholder="Your name"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const fieldErrors = validateField('from_name', value);
+                    setFormErrors(prev => ({
+                      ...prev,
+                      from_name: fieldErrors.from_name || ""
+                    }));
+                  }}
                   className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 pt-6 pb-2 ${
                     formErrors.from_name
                       ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"
@@ -186,6 +214,14 @@ export default function Contact() {
                   name="from_email"
                   required
                   placeholder="your.email@example.com"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const fieldErrors = validateField('from_email', value);
+                    setFormErrors(prev => ({
+                      ...prev,
+                      from_email: fieldErrors.from_email || ""
+                    }));
+                  }}
                   className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 pt-6 pb-2 ${
                     formErrors.from_email
                       ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"
@@ -216,6 +252,14 @@ export default function Contact() {
                   required
                   rows={5}
                   placeholder="Your message here..."
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const fieldErrors = validateField('message', value);
+                    setFormErrors(prev => ({
+                      ...prev,
+                      message: fieldErrors.message || ""
+                    }));
+                  }}
                   className={`w-full px-5 py-4 bg-[#161d27] border rounded-xl text-gray-300 placeholder-gray-600 focus:outline-none focus:ring-1 transition-all duration-300 resize-none pt-6 pb-2 ${
                     formErrors.message
                       ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/50"

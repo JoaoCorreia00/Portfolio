@@ -95,11 +95,12 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Creative", href: "#creative" },
   { label: "Contact", href: "#contact" },
 ];
 
 // Type for active section
-export type SectionId = "home" | "about" | "skills" | "projects" | "contact";
+export type SectionId = "home" | "about" | "skills" | "projects" | "creative" | "contact";
 
 // Project data for Projects section
 export interface Project {
@@ -170,6 +171,140 @@ export const PROJECTS: Project[] = [
     technologies: ["Ruby", "Json", "GitHub"],
     screenshots: ["/Terminal_To_Do_List_1.avif", "/Terminal_To_Do_List_2.avif"],
     githubUrlBackend: "https://github.com/JoaoCorreia00/Terminal-To-Do-List-App",
+  },
+];
+
+// Other Projects data for OtherProjects section
+export interface CreativeProject {
+  id: string;
+  title: string;
+  category: "photoshop" | "stamps";
+  image: string;
+  alt: string;
+}
+
+export const CREATIVE_PROJECTS: CreativeProject[] = [
+  // Photoshop Edits
+  {
+    id: "photoshop-1",
+    title: "Window Underwater",
+    category: "photoshop",
+    image: "/WindowUnderWater.jpg",
+    alt: "Photoshop edit of a window underwater",
+  },
+  {
+    id: "photoshop-2",
+    title: "Elephant Wisp",
+    category: "photoshop",
+    image: "/Elephant Wisp.jpg",
+    alt: "Photoshop edit of an elephant with mystical wisps",
+  },
+  {
+    id: "photoshop-3",
+    title: "Frames",
+    category: "photoshop",
+    image: "/Frames.jpg",
+    alt: "Photoshop edit featuring artistic frames",
+  },
+  {
+    id: "photoshop-4",
+    title: "Jelly Moon",
+    category: "photoshop",
+    image: "/JellyMoon.jpg",
+    alt: "Photoshop edit of a jelly-like moon",
+  },
+  {
+    id: "photoshop-5",
+    title: "Looking The Moon",
+    category: "photoshop",
+    image: "/LokingTheMoon.jpg",
+    alt: "Photoshop edit of someone looking at the moon",
+  },
+  {
+    id: "photoshop-6",
+    title: "Moon And Antique",
+    category: "photoshop",
+    image: "/MoonAndAntique.jpg",
+    alt: "Photoshop edit combining moon and antique elements",
+  },
+  {
+    id: "photoshop-7",
+    title: "Turtle Country",
+    category: "photoshop",
+    image: "/TurtleCountry.jpg",
+    alt: "Photoshop edit featuring a turtle in a countryside scene",
+  },
+  {
+    id: "photoshop-8",
+    title: "Underwater Rhino",
+    category: "photoshop",
+    image: "/UnderWaterRhino.jpg",
+    alt: "Photoshop edit of a rhino underwater",
+  },
+  {
+    id: "photoshop-9",
+    title: "Cats, Paper and Girl",
+    category: "photoshop",
+    image: "/CatsPaperAndGirl.jpg",
+    alt: "Photoshop edit featuring cats, paper and a girl",
+  },
+  
+  // Clothing Stamps
+  {
+    id: "stamps-1",
+    title: "Breaking Bad",
+    category: "stamps",
+    image: "/BreakingBad.png",
+    alt: "Breaking Bad clothing stamp design",
+  },
+  {
+    id: "stamps-2",
+    title: "Nezuko",
+    category: "stamps",
+    image: "/Nezuko.png",
+    alt: "Nezuko from Demon Slayer clothing stamp design",
+  },
+  {
+    id: "stamps-3",
+    title: "Eevee",
+    category: "stamps",
+    image: "/Eevee.png",
+    alt: "Eevee Pokemon clothing stamp design",
+  },
+  {
+    id: "stamps-4",
+    title: "Peaky Blinders",
+    category: "stamps",
+    image: "/peakyblinders.png",
+    alt: "Peaky Blinders clothing stamp design",
+  },
+  {
+    id: "stamps-5",
+    title: "Roronoa Zoro",
+    category: "stamps",
+    image: "/RoronoaZoro.png",
+    alt: "Roronoa Zoro from One Piece clothing stamp design",
+  },
+  {
+    id: "stamps-6",
+    title: "One Piece",
+    category: "stamps",
+    image: "/OnePiece.png",
+    alt: "One Piece clothing stamp design",
+  },
+  {
+    id: "stamps-7",
+    title: "Wolf",
+    category: "stamps",
+    image: "/wolf.png",
+    alt: "Wolf clothing stamp design",
+  },
+  {
+    id: "stamps-8",
+    title: "Darling in the Franxx",
+    category: "stamps",
+    image: "/DarlingintheFranxx.png",
+    alt: "Darling in the Franxx clothing stamp design",
   },
 ];
   

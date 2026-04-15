@@ -47,6 +47,7 @@ const TechnologyCategory = React.memo(({ category }: { category: TechCategoryTyp
                   fill
                   sizes="(max-width: 768px) 40px, 40px"
                   className="object-contain transition-all duration-300 group-hover/tech:scale-110 group-hover/tech:opacity-0"
+                  
                 />
                 {/* Color Icon (on hover) */}
                 <Image
@@ -55,6 +56,7 @@ const TechnologyCategory = React.memo(({ category }: { category: TechCategoryTyp
                   fill
                   sizes="(max-width: 768px) 40px, 40px"
                   className="object-contain opacity-0 transition-all duration-300 scale-90 group-hover/tech:opacity-100 group-hover/tech:scale-100"
+                  loading="lazy"
                 />
                 
               </motion.div>

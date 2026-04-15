@@ -27,14 +27,13 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
         {/* Title with typing animation */}
         {/* The J starts scaled-up (like the loader's J) and shrinks down to title size */}
         <motion.h1
-          className="text-7xl md:text-8xl font-bold mb-6 flex items-center bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
+          className="text-7xl md:text-8xl font-bold mb-6 flex items-center text-white"
           initial={{ opacity: 0, scale: 2.8, filter: "blur(8px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{
             duration: 0.75,
             ease: [0.22, 1, 0.36, 1],
           }}
-          style={{ background: "linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #a0a0a0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
         >
           <span>{typedText}</span>
           {/* Cursor spacing - visible during typing, replaced by invisible spacer when done */}

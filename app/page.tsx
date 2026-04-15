@@ -14,6 +14,7 @@ const Hero = lazy(() => import("./sections/Hero"));
 const About = lazy(() => import("./sections/About"));
 const Skills = lazy(() => import("./sections/Skills"));
 const Projects = lazy(() => import("./sections/Projects"));
+const OtherProjects = lazy(() => import("./sections/OtherProjects"));
 const Contact = lazy(() => import("./sections/Contact"));
 
 // Loading fallback component
@@ -104,6 +105,18 @@ export default function Home() {
             >
               <Suspense fallback={<SectionLoader />}>
                 <Projects />
+              </Suspense>
+            </motion.div>
+
+            {/* Other Projects Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Suspense fallback={<SectionLoader />}>
+                <OtherProjects />
               </Suspense>
             </motion.div>
 

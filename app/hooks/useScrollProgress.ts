@@ -19,7 +19,7 @@ export function useScrollProgress() {
       }
 
       // Determine active section
-      const sections: SectionId[] = ["home", "about", "skills", "projects", "contact"];
+      const sections: SectionId[] = ["home", "about", "skills", "projects", "creative", "contact"];
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
         if (element) {

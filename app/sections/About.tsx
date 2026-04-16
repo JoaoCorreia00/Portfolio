@@ -35,20 +35,22 @@ export default function About() {
             </h3>
 
             <p className="text-lg text-gray-400 leading-relaxed mb-6">
-              I&apos;m a full-stack web developer focused on building scalable, 
-              performance-driven applications with clean architecture and 
-              maintainable code. I work mainly within the JavaScript ecosystem 
-              and PHP environments, using frameworks like Vue, React, Node.js 
-              and Laminas.
+              I&apos;m a full-stack web developer specialising in JavaScript across both frontend and backend, 
+              building scalable, performance-driven applications with a strong focus on clean architecture and maintainability.
             </p>
-            
             <p className="text-lg text-gray-400 leading-relaxed mb-8">
-              I&apos;ve contributed to legacy migrations, authentication systems and complex API integrations, ensuring reliability and maintainability across evolving platforms. I aim to bridge backend logic with thoughtful frontend implementation, aligning performance with user experience.
+              Alongside my JavaScript stack, I have solid experience working with PHP in production environments, 
+              contributing to legacy system migrations, authentication systems and complex API integrations. 
+              This has given me a flexible approach to problem-solving across different technologies and architectures.
+            </p>
+
+            <p className="text-lg text-gray-400 leading-relaxed mb-8">
+              I&apos;m constantly expanding my skillset, currently exploring Rust for its performance and safety, and Ruby through my cybersecurity training.
             </p>
 
             {/* Enhanced skill badges */}
             <div className="flex flex-wrap gap-3">
-              {["Performance", "Architecture", "API Design", "Clean Code"].map((skill) => (
+              {["Performance", "Scalable Systems", "API Integration", "Clean Code"].map((skill) => (
                 <span
                   key={skill}
                   className="px-4 py-2 bg-[#161d27] border border-white/10 rounded-full text-sm text-gray-300 transition-all duration-300 hover:bg-[#1c2532] hover:border-white/20"
@@ -90,22 +92,36 @@ export default function About() {
                     <span className="text-gray-500">,</span>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-gray-500">expertise:</span>
+                    <span className="text-gray-500">core tech:</span>
                     <span className="text-yellow-300">[</span>
                   </div>
                   <div className="pl-8">
-                    <span className="text-green-400">&quot;Full-Stack Development&quot;</span><span className="text-gray-500">,</span>
+                    <span className="text-green-400">&quot;JavaScript&quot;</span><span className="text-gray-500">,</span>
                   </div>
                   <div className="pl-8">
-                    <span className="text-green-400">&quot;API Integrations&quot;</span><span className="text-gray-500">,</span>
+                    <span className="text-green-400">&quot;PHP&quot;</span><span className="text-gray-500">,</span>
                   </div>
                   <div className="pl-8">
-                    <span className="text-green-400">&quot;Authentication Systems&quot;</span><span className="text-gray-500">,</span>
+                    <span className="text-green-400">&quot;Vue.js&quot;</span><span className="text-gray-500">,</span>
                   </div>
                   <div className="pl-8">
-                    <span className="text-green-400">&quot;Legacy System Migration&quot;</span>
+                    <span className="text-green-400">&quot;Node.js&quot;</span><span className="text-gray-500">,</span>
+                  </div>
+                  <div className="pl-8">
+                    <span className="text-green-400">&quot;MySql&quot;</span>
                   </div>
                   <div className="flex gap-2">
+                    <span className="text-yellow-300">]</span>
+                    <span className="text-gray-500">;</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-500">learning:</span>
+                    <span className="text-yellow-300">[</span>
+                    <span className="text-orange-500">Next.js</span>
+                    <span className="text-gray-500">,</span>
+                    <span className="text-orange-500">Ruby</span>
+                    <span className="text-gray-500">,</span>
+                    <span className="text-orange-500">Rust</span>
                     <span className="text-yellow-300">]</span>
                     <span className="text-gray-500">;</span>
                   </div>

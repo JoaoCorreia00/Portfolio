@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: "/Portfolio",
-  output: "export",  // <== enables static exports
-  reactStrictMode: true,
+  output: "export",
+  basePath: "/portfolio",
+  assetPrefix: "/portfolio/",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

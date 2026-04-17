@@ -76,7 +76,7 @@ export const TECHNOLOGY_CATEGORIES: TechnologyCategory[] = [
     technologies: [
       { name: "Jest", colorIcon: "Jest.avif", greyIcon: "Jest_grey.avif" },
       { name: "Postman", colorIcon: "Postman.avif", greyIcon: "Postman_grey.avif" },
-      { name: "ESLint", colorIcon: "Eslint.avif", greyIcon: "Eslint_grey.avif" },
+      { name: "ESLint", colorIcon: "ESLint.avif", greyIcon: "ESLint_grey.avif" },
       { name: "Vite", colorIcon: "Vite.avif", greyIcon: "Vite_grey.avif" },
       { name: "JUnit", colorIcon: "JUnit.avif", greyIcon: "JUnit_grey.avif" },
       { name: "Figma", colorIcon: "Figma.avif", greyIcon: "Figma_grey.avif" },
@@ -217,7 +217,7 @@ export const CREATIVE_PROJECTS: CreativeProject[] = [
     id: "photoshop-5",
     title: "Looking The Moon",
     category: "photoshop",
-    image: "LookingTheMoon.jpg",
+    image: "LokingTheMoon.jpg",
     alt: "Photoshop edit of someone looking at the moon",
   },
   {

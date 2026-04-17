@@ -37,7 +37,7 @@ export const TECHNOLOGY_CATEGORIES: TechnologyCategory[] = [
   {
     name: "Backend",
     technologies: [
-      { name: "PHP", colorIcon: "/Php.avif", greyIcon: "/Php_grey.avif" },
+      { name: "PHP", colorIcon: "Php.avif", greyIcon: "Php_grey.avif" },
       { name: "Node.js", colorIcon: "/Node.avif", greyIcon: "/Node_grey.avif" },
       { name: "Laminas", colorIcon: "/Laminas.avif", greyIcon: "/Laminas_grey.avif" },
       { name: "Zend", colorIcon: "/Zend.avif", greyIcon: "/Zend_grey.avif" },
@@ -120,7 +120,7 @@ export const PROJECTS: Project[] = [
     title: "LusoTourism",
     description: "A Portugal-focused tourism platform that integrates official government APIs to explore accommodations and entertainment venues. Built with Vue and TypeScript, featuring filtering, pagination, responsive design, and performance optimizations like caching.",
     technologies: ["Vue.js", "TypeScript", "Vite", "GitHub", "Postman"],
-    screenshots: ["/LusoTourism_1.avif", "/LusoTourism_2.avif", "/LusoTourism_3.avif", "/LusoTourism_4.avif"],
+    screenshots: ["LusoTourism_1.avif", "LusoTourism_2.avif", "LusoTourism_3.avif", "LusoTourism_4.avif"],
     liveUrl: "https://joaocorreia00.github.io/LusoTourism/",
     githubUrlFrontend: "https://github.com/JoaoCorreia00/LusoTourism",
   },
@@ -129,7 +129,7 @@ export const PROJECTS: Project[] = [
     title: "Cat Breed Android App",
     description: "A native Android app for exploring and saving cat breeds, built with Kotlin and Jetpack Compose. Features include breed search, detailed views, local favorites with Room, and tested MVVM architecture.",
     technologies: ["Kotlin", "Android", "Jetpack Compose", "Room Database", "JUnit", "GitHub"],
-    screenshots: ["/Cat_breed_1.avif", "/Cat_breed_2.avif", "/Cat_breed_3.avif"],
+    screenshots: ["Cat_breed_1.avif", "Cat_breed_2.avif", "Cat_breed_3.avif"],
     githubUrlFrontend: "https://github.com/JoaoCorreia00/Cat_Breed_Android",
   },
   {

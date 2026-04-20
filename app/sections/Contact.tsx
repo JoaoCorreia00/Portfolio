@@ -64,10 +64,14 @@ export default function Contact() {
 
     if (!formRef.current) return;
 
+    console.log("Reached Here");
+
     // Validate form before submission
     if (validation[0] === false || validation[1] === false || validation[2] === false) {
       return;
     }
+
+    console.log("Reached Also Here");
 
     setIsSending(true);
     setError("");

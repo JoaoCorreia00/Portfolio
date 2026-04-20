@@ -12,15 +12,13 @@ export default function Contact() {
   const [error, setError] = useState("");
   const [formErrors, setFormErrors] = useState<{[key: string]: string}>({});
 
-  const validation: boolean[] = [false, false, false]
+  // ---------- 1. Remove the mutable validation array ----------
+ // const validation: boolean[] = [false, false, false]   // delete
 
+// ---------- 2. Update validateField to return a boolean ----------
   const validateField = (fieldName: string, value: string) => {
     const errors: {[key: string]: string} = {};
 
-    validation[0] = false
-    validation[1] = false
-    validation[2] = false
-    
     switch (fieldName) {
       case 'from_name':
         if (!value.trim()) {
@@ -28,53 +26,49 @@ export default function Contact() {
         } else if (value.trim().length < 2) {
           errors.from_name = "Name must be at least 2 characters";
         }
-        else {
-          validation[0] = true
-        }
         break;
-        
       case 'from_email':
         if (!value.trim()) {
           errors.from_email = "Email is required";
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
           errors.from_email = "Please enter a valid email address";
         }
-        else {
-          validation[1] = true
-        }
         break;
-        
       case 'message':
         if (!value.trim()) {
           errors.message = "Message is required";
         } else if (value.trim().length < 10) {
           errors.message = "Message must be at least 10 characters long";
         }
-        else {
-          validation[2] = true
-        }
         break;
     }
-    
     return errors;
   };
 
+  // ---------- 3. Add a helper that tells if the whole form is valid ----------
+  const isFormValid = () => {
+    // No error keys and every required field is non‑empty
+    const required = ['from_name', 'from_email', 'message'] as const;
+    return required.every(
+      (key) => !(formErrors[key] ?? '') && formRef.current?.[key].value.trim() !== ''
+    );
+  };
+
+  // ---------- 4. Change handleSubmit ----------
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formRef.current) return;
 
-    console.log("Reached Here");
-
-    // Validate form before submission
-    if (validation[0] === false || validation[1] === false || validation[2] === false) {
+    // Use the new validation check
+    if (!isFormValid()) {
+      // optionally show a generic error
+      setError('Please correct the highlighted fields.');
       return;
     }
 
-    console.log("Reached Also Here");
-
     setIsSending(true);
-    setError("");
+    setError('');
     setFormErrors({});
 
     try {
@@ -86,21 +80,11 @@ export default function Contact() {
       );
       setIsSent(true);
       formRef.current.reset();
-      setFormErrors({});
-      setTimeout(() => setIsSent(false), 5000); // Extended success message duration
-    } catch (err: unknown) {
+      setTimeout(() => setIsSent(false), 5000);
+    } catch (err) {
       console.error(err);
-      // More detailed error messages based on error type
-      const errorMessage = err instanceof Error ? err.message : String(err);
-      if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
-        setError("Network error. Please check your connection and try again.");
-      } else if (errorMessage.includes('rate') || errorMessage.includes('limit')) {
-        setError("Too many requests. Please wait a moment before trying again.");
-      } else if (errorMessage.includes('service') || errorMessage.includes('template')) {
-        setError("Service temporarily unavailable. Please try again later.");
-      } else {
-        setError("Failed to send message. Please try again or contact me directly via email.");
-      }
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message.includes('network') ? 'Network error.' : 'Failed to send message.');
     } finally {
       setIsSending(false);
     }

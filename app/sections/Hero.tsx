@@ -69,7 +69,7 @@ export default function Hero({ typedText, isTypingDone, hasScrolled }: HeroProps
           <button 
             className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
             onClick={() => {
-              window.open('/CV_JoaoCorreia1.pdf', '_blank');
+              window.open('CV_JoaoCorreia1.pdf', '_blank');
             }}
           >
             Download CV
